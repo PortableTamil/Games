@@ -1,0 +1,14 @@
+/.sconf_temp
+/.sconsign.dblite
+/cache
+/build
+/build-win32
+/config.log
+*~
+*.o
+/pingus-evil
+/pingus-neutral
+/pingus-nice
+/pingus
+/doc/man/pingus.html/index.html
+/doc/man/pingus.html/index.orig.html

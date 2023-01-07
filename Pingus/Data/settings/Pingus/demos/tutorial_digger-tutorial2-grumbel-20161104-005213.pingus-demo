@@ -1,0 +1,5 @@
+(level 
+  (name "tutorial/digger-tutorial2-grumbel")
+  (checksum "579259434"))
+(pingu-action (time 2390) (id 3) (raw-x "00a08044") (raw-y "00801e44") (action "digger"))
+(end (time 3462))

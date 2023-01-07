@@ -1,0 +1,9 @@
+Welcome to Pingus 0.7.6!
+========================
+userdir:                 C:\கிட்அப்\Games\Pingus\Data\settings\Pingus/
+datadir:                 data
+language:                English (en)
+sound support:           enabled
+music support:           enabled
+fullscreen:              disabled
+

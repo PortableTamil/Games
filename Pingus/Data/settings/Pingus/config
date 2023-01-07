@@ -1,0 +1,6 @@
+(pingus-config 
+  (renderer "sdl")
+  (master-volume 0)
+  (sound-volume 0)
+  (music-volume 0)
+  (language "en"))
