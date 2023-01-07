@@ -1,0 +1,20 @@
+Icy Tower Highscore file
+------------------------
+
+This is the encrypted highscore list.  Each line here
+has the format <name floor score code code code ...>.
+
+For uploading and instrutions, visit www.freelunchdesign.com
+and click Icy Tower.
+
+
+SAI 0175 003328 0983 1485 0000 1034 0001 0371 0001 2107
+
+SAI 0169 003231 0362 2487 0000 1360 0001 0371 0001 2107
+
+SAI 0139 003018 0553 0690 0000 1132 0001 0371 0001 2107
+
+IAI 0122 002427 0033 1538 0000 1681 0001 0371 0001 0371
+
+SAI 0138 002375 1034 1355 0000 0583 0001 0371 0001 2107
+
