@@ -1,0 +1,25 @@
+;
+; Run Shokidoki for mini-Shogi
+;
+; overrule board dimension and holdings size
+;
+@mini.ini
+;
+; Shokidoki sends its own setup commands
+;
+/pieceToCharTable=""
+/loadGameFile=""
+;
+; Set first and second engine to Shokidoki (so we skip start menu)
+;
+/cp
+/fcp=sdk
+/fd=..\Shokidoki
+/scp=sdk
+/sd=..\Shokidoki
+/fSAN
+;
+; opening book (not included, but exists!)
+;
+/firstXBook
+/secondXBook

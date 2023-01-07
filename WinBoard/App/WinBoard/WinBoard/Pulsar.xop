@@ -1,0 +1,33 @@
+;
+; parameters for playing against an engine
+;
+/cp
+/firstChessProgram="pulsar2009-9b.exe 2"
+/firstDirectory="../Pulsar"
+/secondChessProgram="pulsar2009-9b.exe 2"
+/secondDirectory="../Pulsar"
+/fSAN
+/sSAN
+;
+;
+; define window layout
+;
+/autoLogo=true
+/moveHistoryUp=true
+/evalGraphUp=false
+/engineOutputUp=false
+/hideThinkingFromHuman=true
+;
+; define window positions
+;
+/winWidth=426
+/winHeight=539
+/moveHistoryX=426
+/moveHistoryY=0
+/moveHistoryW=250
+/moveHistoryH=539
+;
+;
+; prevent these settings from becoming default
+; 
+/saveSettingsOnExit=false

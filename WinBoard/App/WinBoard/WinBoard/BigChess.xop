@@ -1,0 +1,15 @@
+;
+; settings for Big Chess
+;
+/variant=normal
+/boardHeight=16
+/boardWidth=16
+/loadPositionFile="bigchess.fen"
+/boardSize=petite
+;
+; engine
+;
+/fcp="NebiuAlien.exe"
+/fd="../Nebiyu"
+/scp="NebiuAlien.exe"
+/sd="../Nebiyu"

@@ -1,0 +1,20 @@
+;
+; Run Shokidoki for Tori Shogi
+;
+; overrule board dimension and holdings size
+;
+@tori.ini
+;
+; Shokidoki sends its own setup command in Tori Shogi
+;
+/pieceToCharTable=""
+/loadGameFile=""
+;
+; Set first and second engine to Shokidoki (so we skip start menu)
+;
+/cp
+/fcp=sdk
+/fd=..\Shokidoki
+/scp=sdk
+/sd=..\Shokidoki
+/fSAN

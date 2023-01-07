@@ -1,0 +1,95 @@
+;
+; set for Shogi and optimal board size
+;
+/variant=shogi
+/boardSize=middling
+;
+;
+; adapter command for USI
+;
+/uxiAdapter='UCI2WB -s "%fcp" "%fd"'
+;
+;
+; define engines to appear in start menu
+;
+/firstChessProgramNames={"Shokidoki" -fcp "sdk" -fd "..\Shokidoki"
+"Shokidoki 5x5" -fcp "sdk" -fd "..\Shokidoki" @mini
+"Shokidoki 6x6" -fcp "sdk" -fd "..\Shokidoki" @judkins
+"Shokidoki 7x7" -fcp "sdk" -fd "..\Shokidoki" @tori
+"Blunder_USI.exe" -fd "..\Blunder" /fUSI
+'UCI2WB -s "Blunder_USI.exe" "..\\Blunder"'
+"PetitShogi" -fcp 'UCI2WB -s "ssp.exe" "..\\PetitShogi" " byoyomi %s"'
+"PetitShogi 5x5" -fcp 'UCI2WB -s -var 5x5+5_shogi "ssp.exe -maxpromotedan 1" "..\\PetitShogi" " byoyomi %s"' @mini
+"PetitShogi 6x6" -fcp 'UCI2WB -s -var 6x6+6_shogi "ssp.exe -maxpromotedan 2" "..\\PetitShogi" " byoyomi %s"' @judkins
+}
+/secondChessProgramNames={"Shokidoki" -scp "sdk09j" -sd "..\Shokidoki"
+"Blunder_UCI" -sd "..\Blunder" /sUSI
+}
+;
+;
+; No Shogi opening book yet!
+;
+/polyglotBook=""
+/usePolyglotBook=false
+;
+; settings for oriental Shogi board
+;
+;/liteBackTextureFile="textures/xqwood.bmp"
+;/darkBackTextureFile="textures/xqwood.bmp"
+/liteBackTextureMode=1
+/darkBackTextureMode=1
+/lightSquareColor=#ff8020
+/darkSquareColor=#ff8020
+;
+; suppress square boundaries, and use arrow for highlighting in stead
+;
+;/overrideLineGap=0
+/highlightMoveWithArrow=true
+;
+; select font for piece rendering
+;
+/renderPiecesWithFont="Shogi"
+/fontPieceToCharTable="HFCBGE...D.OMKJNLAhfcbge...d.omkjnla"
+/fontPieceBackColorWhite=#000000
+/fontPieceForeColorWhite=#ffffff
+/fontPieceBackColorBlack=#000000
+/fontPieceForeColorBlack=#ffffff
+/fontPieceSize=80
+;
+; make sure perpetual-check adjudication works before engine can claim draw
+;
+/repeatsToDraw=3
+;
+; define window layout
+;
+/moveHistoryUp=true
+/evalGraphUp=true
+/engineOutputUp=true
+;
+; window positions
+;
+/minX=437
+/minY=126
+/winWidth=426
+/winHeight=539
+/gameListX=-437
+/gameListY=0
+/gameListW=437
+/gameListH=304
+/moveHistoryX=-437
+/moveHistoryY=304
+/moveHistoryW=437
+/moveHistoryH=235
+/evalGraphX=0
+/evalGraphY=-126
+/evalGraphW=426
+/evalGraphH=126
+/engineOutputX=-437
+/engineOutputY=-126
+/engineOutputW=437
+/engineOutputH=430
+;
+; prevent this from automatically becoming standard setting
+;
+/saveSettingsFile=%APPDATA%\winboard-SG.ini
+/settingsFile=%APPDATA%\winboard-SG.ini

@@ -1,0 +1,1 @@
+The updated WinBoard Portable icon is from the Oxygen icon set.  Copyright Oxygen Team.  Released under the GPL as included in license.txt.

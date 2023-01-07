@@ -1,0 +1,75 @@
+;
+;
+; Redirect saving to settings file reserved for CCT spectator
+;
+/settingsFile=%APPDATA%\winboard_ics.ini
+/settingsFile=%APPDATA%\winboard_cct.ini
+/saveSettingsFile=%APPDATA%\winboard_cct.ini
+;
+;
+; parameters for playing on Variant ICS
+;
+/ics
+/icshost="83.163.204.254"
+/icshelper="timeseal"
+;
+;
+; switch auxiliary windows on to view engine kibitz
+;
+/moveHistoryUp=false
+/engineOutputUp=true
+/evalGraphUp=true
+/autoLogo=false
+;
+;
+; be sure board size is chosen that supports variant pieces
+;
+/boardSize=middling
+;
+;
+; set auto-kibitz mode to capture engine kibitz
+;
+/autoKibitz
+;
+;
+; define window positions
+;
+/winWidth=426
+/winHeight=513
+/x=0
+/y=0
+/icsX=426
+/icsY=235
+/icsW=600
+/icsH=414
+/evalGraphX=0
+/evalGraphY=513
+/evalGraphW=426
+/evalGraphH=136
+/engineOutputX=426
+/engineOutputY=0
+/engineOutputW=599
+/engineOutputH=235
+;
+;
+; configure ICS context menu
+;
+/chatBoxes="shouts;64;49"
+/icsMenu={-
+&Who,who,0,1
+&Games,games,0,1
+Tourne&y Standings,mam who 1,0,1
+Tour&ney Games,mam games 1,0,1
+Receive Guest Tells,set tell 1,0,1
+Block Guest Tells,set tell 0,0,1
+| ,none,0,0
+Open Chat &Box (name),chat,1,0
+&Tell (name),tell,1,0
+M&essage (name),message,1,0
+-
+&Finger (name),finger,1,1
+&Vars (name),vars,1,1
+&Observe (name),observe,1,1
+&History (name),hist,1,1
+Mailstored (name),mailstor %s -1,1,1
+}

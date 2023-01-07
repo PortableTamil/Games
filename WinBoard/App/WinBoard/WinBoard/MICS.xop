@@ -1,0 +1,67 @@
+;
+; parameters for playing on MICS
+;
+/ics
+/icshost="alanimus.com"
+/icshelper="timeseal"
+;
+;
+; setup automatic saving of password
+;
+/icsLogon=%APPDATA%\MICS.txt
+/autoCreateLogon=false
+;
+;
+; switch auxiliary windows off in Human mode
+;
+/engineOutputUp=false
+/evalGraphUp=false
+/autoLogo=false
+;
+;
+; be sure board size is chosen that supports variant pieces
+;
+/boardSize=middling
+;
+;
+; define window positions
+;
+/winWidth=426
+/winHeight=539
+/icsX=426
+/icsY=200
+/icsW=600
+/icsH=339
+/moveHistoryX=426
+/moveHistoryY=0
+/moveHistoryW=600
+/moveHistoryH=200
+;
+;
+; set bigger console font
+;
+/size=tiny /icsFont="Courier New:10c0"
+/size=teeny /icsFont="Courier New:10c0"
+/size=dinky /icsFont="Courier New:10c0"
+/size=petite /icsFont="Courier New:10c0"
+/size=slim /icsFont="Courier New:10c0"
+/size=small /icsFont="Courier New:10c0"
+/size=mediocre /icsFont="Courier New:10c0"
+/size=middling /icsFont="Courier New:10c0"
+/size=average /icsFont="Courier New:10c0"
+/size=moderate /icsFont="Courier New:10c0"
+/size=medium /icsFont="Courier New:10c0"
+/size=bulky /icsFont="Courier New:10c0"
+/size=large /icsFont="Courier New:10c0"
+/size=big /icsFont="Courier New:10c0"
+/size=huge /icsFont="Courier New:10c0"
+/size=giant /icsFont="Courier New:10c0"
+/size=colossal /icsFont="Courier New:10c0"
+/size=titanic /icsFont="Courier New:10c0"
+/size=bulky
+;
+;
+; Redirect saving to settings file reserved for ICS play
+;
+/saveSettingsFile=%APPDATA%\winboard_ics.ini
+/settingsFile=%APPDATA%\winboard_ics.ini

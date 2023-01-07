@@ -1,0 +1,43 @@
+;
+; parameters for playing on Variant ICS
+;
+/ics
+/icshost="83.163.204.254"
+/icshelper="timeseal"
+;
+; switch auxiliary windows off in Human mode
+;
+/engineOutputUp=false
+/evalGraphUp=false
+/autoLogo=false
+;
+;
+; be sure board size is chosen that supports variant pieces
+;
+/boardSize=middling
+;
+;
+; set auto-kibitz mode to capture engine kibitz
+;
+/autoKibitz
+;
+;
+; define window positions
+;
+/chatBoxes="shouts;64"
+/winWidth=426
+/winHeight=539
+/icsX=426
+/icsY=200
+/icsW=600
+/icsH=339
+/moveHistoryX=426
+/moveHistoryY=0
+/moveHistoryW=600
+/moveHistoryH=200
+;
+;
+; Redirect saving to settings file reserved for ICS play
+;
+/saveSettingsFile=%APPDATA%\winboard_ics.ini
+/settingsFile=%APPDATA%\winboard_ics.ini
