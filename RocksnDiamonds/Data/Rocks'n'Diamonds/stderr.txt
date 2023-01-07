@@ -1,0 +1,1 @@
+rocksndiamonds.exe: warning: configuration file 'C:\Users\inthirua\Documents\Rocks'n'Diamonds\cache\artworkinfo.cache' is empty
