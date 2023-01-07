@@ -1,0 +1,9 @@
+easy.set:1:completed:TRUE
+easy.set:2:completed:TRUE
+easy.set:3:completed:FALSE
+easy.set:4:completed:FALSE
+easy.set:5:completed:FALSE
+easy.set:6:completed:FALSE
+easy.set:7:completed:FALSE
+easy.set:8:completed:FALSE
+easy.set:9:completed:FALSE
