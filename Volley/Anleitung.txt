@@ -1,0 +1,83 @@
+Inhalt
+1. ...............................Das Spiel
+2. .............................Spielregeln
+3. ...........................Das Hauptmenü
+  3.1 ........................Spiel starten
+  3.2 ........................Netzwerkspiel
+    3.2.1 .......Einstellungen für den Host
+    3.2.2 .......Einstellungen für den Gast
+  3.3 ............................Statistik
+  3.4 ...............das Einstellungen-Menü
+4. ............Ändern des Hintergrundbildes
+5. .....................Rechtliche Hinweise   
+
+
+
+1. Das Spiel
+
+  Bei Blobby Volley handelt es sich um ein Geschicklichkeitsspiel, bei dem man mit außerirdischen Gummibärchen (!) ein Volleyballmatch austrägt.
+
+Systemvoraussetzungen:
+
+  Rechner mit Windows 95 oder höher, mind. Pentium / 200 MHz, 16 MB Ram, eine schnelle Grafikkarte, 1 MB auf der Festplatte. Für das Netzwerkspiel muss das Protokoll TCP/IP installiert sein. (Das ist normalerweise schon erledigt.)
+ 
+
+2. Die Spielregeln
+
+  Es gelten die üblichen Volleyballregeln. Ein Spieler erhält den Aufschlag und bekommt bei einem Fehler des Gegners einen Punkt. Macht der Spieler, der den Aufschlag hat, einen Fehler bekommt der Gegner die Angabe und erhält so die Möglichkeit zu Punkten. 
+  Als Fehler wird die Berührung des Balles mit dem Boden der eigenen Spielfeldhälfte oder eine viermalige Berührung des Balles bezeichnet. 
+  Gewonnen hat der Spieler welcher als erstes 15 Punkte erreicht und dabei 2 Punkte mehr hat als der Gegner. Falls der Punktunterschied kleiner als zwei Punkte ist wird so lange gespielt bis eine Partei 2 Punkte mehr hat als die andere. 
+  Die einzigen Unterschiede zum "echten" Volleyball sind, dass auf jeder Seite nur einen Spieler steht und dieser den Ball mehrmals berühren darf, sowie die Möglichkeit, den Ball nach dem Aufschlag nochmals zu berühren.
+
+
+3. Das Hauptmenü
+
+Spiel starten		startet das Spiel
+Netzwerkspiel		öffnet das Netzwerkspiel-Menü
+Statistik		zeigt den Statistikbildschirm
+Einstellungen		öffnet das Einstellungen-Menü
+English please		aktiviert englische Sprache
+Ende			beendet das Programm
+
+
+3.1 Spiel starten
+  
+  Ein Klick auf diesen Menüpunkt startet ein Spiel im Einzel- oder Multiplayermodus am selben Rechner. Die Einstellungen hierfür werden vor dem Spiel in den Einstellungen vorgenommen. Ein Spiel lässt sich mit ESC wieder beenden. Nach dem Druck auf ESC muss noch einmal mit Return, J, Y oder O bestätigt werden.
+
+3.2 Netzwerkspiel
+
+  Hier kann ein Spiel im lokalen Netzwerk gestartet werden. Auf dem ersten Bild hat man die Wahl zwischen EIN SPIEL HOSTEN ... oder ALS GAST SPIELEN ... . Um ein neues Netzwerkspiel zu starten drückt man auf EIN SPIEL HOSTEN ... und es erscheint das Menü mit den Host-Einstellungen. Wer an einem vorhandenen Spiel teilnehmen möchte nutzt dafür den Punkt ALS GAST SPIELEN ... um zu den Einstellungen für den Gast zu gelangen.
+
+  Anmerkung: Das Spiel über nichtlokale Netzwerke funktioniert nur vernünftig wenn die Verbindung schnell genug ist. Falls dies nicht der Fall sein sollte wird das Spiel nicht flüssig laufen und die Steuerung des Gastspielers kaum möglich sein.
+
+3.2.1 Das Einstellungsmenü für den Host
+
+  Als erstes wird hier neben NAME DES SPIELS eine Bezeichnung für das neue Spiel eingegeben. Dieser Spielname erscheint dann in der Liste der vorhandenen Spiele bei einem Gast im selben Netzwerk. Mit dem Menüpunkt STEUERUNG kann zwischen Maus- oder Tastatursteuerung gewählt werden. Der Host bekommt immer die Tasten und die Farbe von Spieler 1 aus dem EINSTELLUNGEN-Menü zugewiesen. 
+  Mit SPIEL BEGINNEN wird das Netzwerkspiel zur Liste der vorhandenen Spiele hinzugefügt. Der Computer wartet nun so lange bis sich ein Gast eingeloggt hat, dann beginnt das Spiel.
+
+3.2.2 Das Einstellungsmenü für den Gast
+
+  Neben HOST-IP: kann man eine IP-Adresse angeben um dort gezielt ein Spiel zu suchen. Diese Einstellung ist aber nur für nichtlokale Netzwerke notwendig. 
+  Mit dem Menüpunkt STEUERUNG kann zwischen Maus- oder Tastatursteuerung gewählt werden. Der Gast bekommt immer die Tasten und die Farbe von Spieler 2 aus dem EINSTELLUNGEN-Menü zugewiesen. 
+  Wenn man auf SPIELE SUCHEN drückt beginnt der Computer nach Spielen an der gewünschten IP-Adresse und im lokalen Netzwerk zu suchen. Sobald er fertig ist zeigt er Ergebnis in einer Liste an. Jetzt wählt man nur noch das gewünschte Spiel um das Match zu starten.
+
+3.3 Die Statistik
+
+  In der Statistik werden die Anzahl der Spiele (SP.), die Anzahl der gewonnenen Spiele (GEW.) und die Punkte eines jeden Spielers angezeigt. Die Punkte werden aus dem Punktunterschied aller Spiele berechnet wobei der Gewinner den Punktunterschied gutgeschrieben bekommt und dem Verlierer die gleiche Punktzahl abgezogen wird. Einen negativen Punktestand gibt es nicht. 
+  Die Anzeige kann nach verschiedenen Aspekten geordnet werden indem man auf die jeweilige Überschrift drückt. Namen werden in alphabetischer Reihenfolge geordnet und Zahlen der Größe nach beginnend bei der Höchsten.
+
+3.4 Das Einstellungen-Menü
+
+  Mit Spieler 1 ist der linke Spieler bzw. Host gemeint und unter Spieler 2 kann man die Werte für den rechten Spieler bzw. Gast ändern.   Die Farbe der Spielfiguren lässt sich durch einen Klick auf den kleinen Blob (außerirdisches Gummibärchen) einstellen. Hinter NAME gibt man den Namen des Spielers an, unter diesem Namen wird man dann in der Statistik gelistet. Ein Klick auf den Punkt STEUERUNG ändert die Steuerung des jeweiligen Spielers, dabei hat man die Wahl zwischen Maus-, Tastatur- und Computersteuerung (in drei Schwierigkeitsstufen). Die Tastenbelegung für beide Spieler kann man unter TASTEN DEFINIEREN... ändern. Die Option SOUND ist zum Ein- und Ausstellen der Geräusche während des Spiels.
+
+
+4. Das Ändern des Hintergrundbildes
+
+  Wem das Hintergrundbild nicht gefällt kann sich auch ein eigenes malen. Das neue Bild muss eine Auflösung von 800x600 haben und als BMP unter dem Namen "bvbg.bmp" im Blobby Volley-Ordner abgespeichert sein. Blobby Volley nimmt diese Grafik dann automatisch als Hintergrund. 
+  Hinweis: Der Stab in der Mitte des Spielfeldes wird nicht automatisch eingefügt, sondern muss in das neue Bild hineingemalt werden. Er wird mittig am unteren Bildrand platziert und hat eine Breite von 16 und eine Höhe von 323 Pixeln.
+
+5. Rechtliche Hinweise
+
+  Blobby Volley ist Freeware. Das Urheberrecht liegt bei den Autoren Daniel Skoraszewsky und Silvio Mummert. Das Archiv "blobby.zip" darf nur im unveränderten Zustand weitergegeben werden. Eigene Hintergrundbilder dürfen nur separat an andere User verteilt werden.
+
+Viel Spaß beim Spielen wünschen Daniel Skoraszewsky und Silvio Mummert.

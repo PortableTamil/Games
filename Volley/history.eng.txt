@@ -1,0 +1,73 @@
+V1.8			(Jul01)
+  French language
+  improved Carl
+
+V1.7.4			(Jun01)
+  Bug fixes
+  version number in main menu screen
+
+V1.7.3			(May01)
+  Bug fixes
+  sound works properly under Win2000
+
+V1.7			(Mar01)
+  errorneous-names-after-LAN-playing-bug removed
+  8 different colors for the Blobbies
+  changeable background image
+
+V1.6			(Mar01)
+  LAN and Internet-playing capability
+  instructions excluded from the game itself
+
+V1.4.0			(Jan01)
+  statistics
+  players have names
+  general protection fault is now really removed
+  we now have small characters
+  query for confirmation of terminating a match
+
+V1.3.2			(Dec00)
+  (not publicited)
+  generalization of the control mechanism (so that it is easier to implement playing over LAN)
+  made the charset smaller                (because LAN-playing needs lots of settings!)
+
+V1.3.1			(Dec00)
+  improved decompressing routine
+  there was an error occuring when not using DD and the ball fell out of the screen
+  general protection fault at the end removed
+
+V1.3			(Dec00)
+  ball-falls-through-net-bug fixed
+  match-end-animation
+
+V1.2			(Nov00)
+  bug fixes
+
+V1.1.1.6		(Nov00)
+  some minor bugfixes
+  once again changing of the settings menu
+
+V1.1.1.4		(Nov00)
+  possibility of toggling sound 
+  settings menu adapted
+
+V1.0			(Nov00)
+  first realease,
+  with ending splash screen
+
+V0.9			(Sep00)
+  some bug fixes
+  2 additional computer opponents
+
+V0.8.6			(Aug00)
+  changed background image
+  mouse control also in the menu
+  computer opponents
+
+V0.8.2			(Jul00)
+  menus, 
+  shadows, 
+  mouse control for one player  
+
+V0.8			(Jul00)
+  starting work, some things playable with keyboard

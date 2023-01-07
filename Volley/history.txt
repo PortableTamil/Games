@@ -1,0 +1,74 @@
+V1.8			(Jul01)
+  Französisch
+  Carl verbessert
+
+V1.7.4			(Jun01)
+  Bugfixes
+  Versionsnummernanzeige im Hauptmenübildschirm
+
+V1.7.3			(Mai01)
+  Bugfixes
+  Sound geht nun auch unter Win2000 richtig.
+
+V1.7			(Mär01)
+  Fehlerhafte-Namen-Nach-Netzwerkspiel-Bug entfernt
+  Bunte Blobbys (8 Farben)
+  Hintergrundbild veränderbar (durch Positionierung einer Datei namens "bvbg.bmp" im BV-Ordner)  
+
+V1.6			(Mär01)
+  Netzwerkfähigkeit
+  Anleitung nicht mehr im Spiel
+
+V1.4.0			(Jan01)
+  Statistikfunktionen
+  Spielernamen
+  Schutzverletzung bei Programmende unter WinNT / 2000 müsste weg sein
+  Kleinbuchstaben (!)
+  Spielabbruchbestätigungsabfrage
+
+V1.3.2			(Dez00)
+  (nicht veröffentlicht)
+  Verallgemeinerung der Steuerung (sodass z.B. Netzwerk leichter einzubauen ist)
+  Verkleinerung des Zeichensatzes (   "    "      "        "          "      " ) (*g*)
+
+V1.3.1			(Dez00)
+  Dekomprimierroutine verbessert
+  Fehler bei Nichtverwendung von DirectDraw beseitigt
+  Speicherfehler am Ende hoffentlich beseitigt.
+
+V1.3			(Dez00)
+  ein paar Fehler beseitigt, (Netz- Fehler hoffentlich)
+  Spiel-Ende-Animation (wird möglicherweise noch geändert)
+
+V1.2			(Nov00)
+  noch mehr Bugx gefixt
+
+V1.1.1.6		(Nov00)
+  diverse Bugfixes
+  Anpassung des Einstellungen-Menüs
+
+V1.1.1.4		(Nov00)
+  Möglichkeit, Sound auszuschalten
+  Anpassung des Einstellungen-Menüs
+
+V1.0			(Nov00)
+  Erstes Release, mit Ende-Bildschirm
+
+V0.9			(Sep00)
+  ein paar Bugfixes
+  noch 2 zusätzliche Computergegner  
+
+V0.8.6			(Aug00)
+  anderes Hintergrundbild
+  Maussteuerung auch im Menü
+  Computergegner
+
+V0.8.2			(Jul00)
+  alles bestens. 
+  Menü wird eingebaut,
+  Schatten werden eingebaut, 
+  Maussteuerung eines Spielers
+
+V0.8			(Jul00)
+  Beginn mit der Arbeit
+

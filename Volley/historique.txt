@@ -1,0 +1,73 @@
+V1.8			(Juil01)
+  Langue francaise
+  amélioré Carl  
+
+V1.7.4			(Juin01)
+  Bugfixes
+  Affichage du n° de version dans l'écran menu principal
+
+V1.7.3			(Mai01)
+  Bugfixes
+  Maintenant le son fonctionne correctement sous Win2000.
+
+V1.7			(Mars01)
+ Mauvais noms après avoir joué en réseau corrigé
+ Blobbys en couleurs (8 couleurs)
+ Changé l'arrière plan (par positionnement du fichier "bvbg.bmp" dans le répertoire B-V) 
+
+V1.6			(Mars01)
+  Jeu en réseau possible
+  Mode d'emploi éxclu du jeu
+
+V1.4.0			(Jan01)
+  Fonction statistiques 
+  Nom des joueurs
+  Violation d'accès sous WinNT/2000 devrait être supprimée
+  Petits caractères (!)
+  Demande de confirmation d'arrêt de jeu  
+
+V1.3.2			(Dec00)
+  (non publiée)
+  Amelioration mise en place du réseau
+
+V1.3.1			(Dec00)
+   Routine de décompression améliorée 
+   Erreur d'une non-utilisation de DirectDraw supprimée 
+   Erreur de mémoire supprimée.
+
+V1.3			(Dec00)
+  Supprimé quelques erreurs 
+  Animation de fin de jeu (sera éventuellement encore changée)
+
+V1.2			(Nov00)
+  Fixé encore plus de bugs
+
+V1.1.1.6		              (Nov00)
+  divers Bugfixes
+  Ajustement du menu réglages 
+
+V1.1.1.4		              (Nov00)
+  Possibilité d'enlever le son
+  Ajustement du menu réglages
+
+V1.0		              (Nov00)
+  Première version avec  Animation de fin de jeu
+
+V0.9		              (Sep00)
+  divers Bugfixes
+  Encore deux Adversaires virtuels en plus   
+
+V0.8.6			(Aout00)
+  Arrière plan changé
+  Commande du menu avec la souris
+  Adversaires virtuels
+
+V0.8.2			 (Juil00)
+  Tout va du mieux. 
+  Menu en construction,
+  Ombres en construction, 
+  jouer avec la souris en construction
+
+V0.8			 (Juil00)
+  Début des travaux.
+

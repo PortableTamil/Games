@@ -1,0 +1,107 @@
+Table des matières
+1. ...................................Le jeu
+2. ........................Les règles du jeu
+3. ...........................Menu Principal
+  3.1 .................................Jouer 
+  3.2 .........................Jeu en réseau
+    3.2.1 .......Le menu réglages du serveur
+    3.2.2 ......Le menu réglages de l'invité
+  3.3 ......................Les Statistiques
+  3.4 ......................Le menu réglages
+4. ...................Changer d'arrière plan
+5. .....Informations sur les droits d'auteur
+
+1. Le jeu 
+
+    Blobby Volley est un jeu d'adresse, avec lequel on joue un match de volley avec de petits bonhommes gélatineux. 
+    Configuration nécessaire:
+    P.C. avec win9x/NT/2000 Pentium / 200 MHz, 16 Mo Ram, carte graphique performante, 1Mo d'espace libre sur le disque dur.
+    Pour le jeu en réseau le protocole TCP/IP doit être installé.
+  
+2. Les règles du jeu
+
+   Ce sont les règles habituelles du volley-ball qui s'appliquent. Un joueur à droit au service et un point après une erreur de    l'adversaire.
+   Si le joueur qui a le service fait une erreur, c'est l'adversaire qui à droit à la balle et à la possibilité de marquer des points. 
+   Les erreurs possibles sont, la balle touche le sol du propre terrain ou plus de quatre manipulations de la balle par le joueur.
+   Le gagnant est le joueur qui à atteint en premier le score de 15 points et à 2 points en plus que l'adversaire. 
+   Au cas ou la différence de points est plus petite que 2 points le jeu continue jusqu'a ce que l'un des deux joueurs à 2 points de plus que l'autre.
+   Les seules différences par rapport au vrai volley-ball sont qu'il n'y a qu'un seul joueur de chaque coté du filet et que celui ci peut manipuler plusieurs fois la balle, comme la  possibilité de toucher la balle après le service.
+  
+3. Menu Principal
+
+Jouer		              Démarre le jeu
+Jeu réseau		ouvre le menu jeu en réseau
+Statistiques	              montre l'écran statistiques
+Réglages		              ouvre le menu réglages
+English please		active la langue anglaise
+Fin			fin du jeu
+
+
+3.1 Jouer
+  
+  Un clic sur ce point du menu démarre le jeu en mode joueur unique ou multijoueur sur le même P.C. 
+  Les réglages sont à faire avant le jeu.
+  On peut quitter le jeu en appuyant la touche ESC, après avoir appuyé sur ESC il faut encore confirmer avec Y ou J
+ 
+3.2 Jeu en réseau
+
+  Avec ce mode vous pouvez jouer sur votre réseau local.
+  Sur le premier écran vous avez le choix entre SERVEUR (host) ou INVITE.
+  Pour démarrer un nouveau jeu en réseau cliquer su SERVEUR (host) et vous atteignez le menu avec les réglages du serveur.
+  Qui veut participer à un jeu déjà établi doit utiliser le menu INVITE pour accéder aux réglages Invité.  
+ 
+ Remarque: Le jeu hors réseau local ne fonctionne correctement que si la connexion est assez performante.
+ Si ce n'est pas le cas le jeu ne sera pas fluide.
+  
+3.2.1 Le menu réglages du serveur
+
+  En premier il faut entrer à coté du NOM DU JOUEUR une description du nouveau jeu.
+ Ce nom apparaîtra alors dans la liste des jeux présents chez l'un des INVITEs du réseau.
+ Avec le menu CONTROLES vous pouvez choisir entre le contrôle par la souris ou clavier.
+ Le serveur reçoit toujours les couleurs et les touches du joueur 1 du menu REGLAGES.
+ Avec JOUER le jeu est ajouté à la liste des jeux présents.
+Le P.C. attend jusqu'a ce qu'un invité c'est connecté, le jeu commence.
+  
+3.2.2 Le menu réglages de l'invité
+
+  A coté de HOST-IP: On peut entrer une adresse IP afin de chercher un jeu a cet endroit, mais ce réglage n'est utile qu'en cas de réseau non local.
+  Avec le menu CONTROLES vous pouvez choisir entre clavier ou souris, L'invité reçoit toujours les couleurs et les touches du joueur 2 du menu REGLAGES.
+  Quand on clique sur CHERCHER JEUX le P.C. commence à chercher un jeu sur le réseau local ou à l'adresse IP indiquée, à la fin de la recherche le résultat s'affiche dans une liste.
+Il suffit maintenant de cliquer sur le jeu choisi pour commencer à jouer.
+  
+3.3 Les Statistiques
+
+Dans les statistiques le nombre de jeux (jr), le nombre de jeux gagnés (ga) et le nombre de points de chaque joueur est affiché.
+Les points sont calculés  à partir du nombre de points de chaque joueur d'après quoi le gagnant se voit attribué la différence de points qui est retirée au perdant.  
+Un nombre de points négatif n'existe pas.
+L'affichage peut être organisé d'après differents critères en cliquant sur l'entête correspondante. 
+Les noms sont affichés par ordre alphabétique et les chiffres du plus grand au plus petit.  
+
+3.4 Le menu réglages
+
+ Par joueur 1 on entend le joueur de gauche (host) et par joueur 2 on peut changer les paramètres du joueur de droite (invité.
+ La couleur des bonhommes peut être changée en cliquant dessus.
+ Dans NOM on entre le nom du joueur, les statistiques seront créées à partir de ce nom.
+Un clic sur le menu CONTROLES  change le mode de contrôle du joueur, on a le choix entre souris  clavier ou P.C avec trois niveaux facile, moyen, difficile
+Dans le menu DEFINIR TOUCHES le touches allouées à chaque joueur peuvent être changées.
+L'option SON sert à arrêter ou à mettre en marche les differents bruitages du jeu. 
+
+
+4. Changer d'arrière plan
+
+  Si l'arrière plan ne vous plait pas vous pouvez en créer un vous-même.
+La nouvelle image doit avoir une résolution de 800x600 et doit s'appeler "bvbg.bmp" et doit être enregistrée dans le répertoire de blobby volley.
+Blobby volley prendra automatiquement cette image comme arrière plan.
+Info: le poteau du milieu de terrain n'est pas inséré automatiquement par le jeu, mais doit être dessiné sur l'image d'arrière plan.
+Il est centré et placé à ras de l'image et a une largeur de 16 et une hauteur de 323 Pixels.  
+
+ 
+5. Informations sur les droits d'auteur
+  [Ce section est sans garantie. Voiez dans la version allemande ou anglaise.]
+  Blobby volley est un gratuiciel.
+  Les droits d'auteur appartiennent aux auteurs Daniel Skoraszewsky et Silvio Mummert.
+  L'archive  "blobby.zip" ne peut être distribuée qu'en l'état original.
+  Les images d'arrière plan ne peuvent être distribuées séparément à d'autres utilisateurs. 
+  
+Daniel Skoraszewsky et Silvio Mummert vous souhaitent Beaucoup de plaisir avec leur jeu  .
+
