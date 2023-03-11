@@ -1,0 +1,3588 @@
+@RULE AnimatedPixelArt
+A rule designed for the creation of animated pixel art in Golly.
+States 0 to 10 are coloured pixels that don't store any additional information. They replace states 132-252 if a period of less than 5 is desired.
+States 132-252 store their display colour and a second color value, which gets shifted clockwise around the 2x2 pixel.
+States 11-131 are the top left corners of the 2x2 pixel.
+
+The palette used was created by SpeedyCube for the PixelJoint 11 Color Palette Competition -> http://pixeljoint.com/forum/forum_posts.asp?TID=25051&PID=211344#211344
+
+@TABLE
+n_states: 253
+neighborhood: Moore
+symmetries: none
+
+var tl = {11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131}
+var oc = {132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var stable = {0,1,2,3,4,5,6,7,8,9,10}
+var any0 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var any1 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var any2 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var any3 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var any4 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var any5 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var any6 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var any7 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252}
+var tl_has0 = {11,22,33,44,55,66,77,88,99,110,121}
+var oc_is0 = {132,133,134,135,136,137,138,139,140,141,142}
+var oc_has0 = {132,143,154,165,176,187,198,209,220,231,242}
+var tl_has1 = {12,23,34,45,56,67,78,89,100,111,122}
+var oc_is1 = {143,144,145,146,147,148,149,150,151,152,153}
+var oc_has1 = {133,144,155,166,177,188,199,210,221,232,243}
+var tl_has2 = {13,24,35,46,57,68,79,90,101,112,123}
+var oc_is2 = {154,155,156,157,158,159,160,161,162,163,164}
+var oc_has2 = {134,145,156,167,178,189,200,211,222,233,244}
+var tl_has3 = {14,25,36,47,58,69,80,91,102,113,124}
+var oc_is3 = {165,166,167,168,169,170,171,172,173,174,175}
+var oc_has3 = {135,146,157,168,179,190,201,212,223,234,245}
+var tl_has4 = {15,26,37,48,59,70,81,92,103,114,125}
+var oc_is4 = {176,177,178,179,180,181,182,183,184,185,186}
+var oc_has4 = {136,147,158,169,180,191,202,213,224,235,246}
+var tl_has5 = {16,27,38,49,60,71,82,93,104,115,126}
+var oc_is5 = {187,188,189,190,191,192,193,194,195,196,197}
+var oc_has5 = {137,148,159,170,181,192,203,214,225,236,247}
+var tl_has6 = {17,28,39,50,61,72,83,94,105,116,127}
+var oc_is6 = {198,199,200,201,202,203,204,205,206,207,208}
+var oc_has6 = {138,149,160,171,182,193,204,215,226,237,248}
+var tl_has7 = {18,29,40,51,62,73,84,95,106,117,128}
+var oc_is7 = {209,210,211,212,213,214,215,216,217,218,219}
+var oc_has7 = {139,150,161,172,183,194,205,216,227,238,249}
+var tl_has8 = {19,30,41,52,63,74,85,96,107,118,129}
+var oc_is8 = {220,221,222,223,224,225,226,227,228,229,230}
+var oc_has8 = {140,151,162,173,184,195,206,217,228,239,250}
+var tl_has9 = {20,31,42,53,64,75,86,97,108,119,130}
+var oc_is9 = {231,232,233,234,235,236,237,238,239,240,241}
+var oc_has9 = {141,152,163,174,185,196,207,218,229,240,251}
+var tl_has10 = {21,32,43,54,65,76,87,98,109,120,131}
+var oc_is10 = {242,243,244,245,246,247,248,249,250,251,252}
+var oc_has10 = {142,153,164,175,186,197,208,219,230,241,252}
+stable,any0, any1,any2,any3,any4,any5,tl_has0,any7,0
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has0,0
+stable,tl_has0,any1,any2,any3,any4,any5,any6,any7,0
+stable,any0, any1,any2,any3,any4,any5,tl_has1,any7,1
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has1,1
+stable,tl_has1,any1,any2,any3,any4,any5,any6,any7,1
+stable,any0, any1,any2,any3,any4,any5,tl_has2,any7,2
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has2,2
+stable,tl_has2,any1,any2,any3,any4,any5,any6,any7,2
+stable,any0, any1,any2,any3,any4,any5,tl_has3,any7,3
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has3,3
+stable,tl_has3,any1,any2,any3,any4,any5,any6,any7,3
+stable,any0, any1,any2,any3,any4,any5,tl_has4,any7,4
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has4,4
+stable,tl_has4,any1,any2,any3,any4,any5,any6,any7,4
+stable,any0, any1,any2,any3,any4,any5,tl_has5,any7,5
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has5,5
+stable,tl_has5,any1,any2,any3,any4,any5,any6,any7,5
+stable,any0, any1,any2,any3,any4,any5,tl_has6,any7,6
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has6,6
+stable,tl_has6,any1,any2,any3,any4,any5,any6,any7,6
+stable,any0, any1,any2,any3,any4,any5,tl_has7,any7,7
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has7,7
+stable,tl_has7,any1,any2,any3,any4,any5,any6,any7,7
+stable,any0, any1,any2,any3,any4,any5,tl_has8,any7,8
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has8,8
+stable,tl_has8,any1,any2,any3,any4,any5,any6,any7,8
+stable,any0, any1,any2,any3,any4,any5,tl_has9,any7,9
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has9,9
+stable,tl_has9,any1,any2,any3,any4,any5,any6,any7,9
+stable,any0, any1,any2,any3,any4,any5,tl_has10,any7,10
+stable,any0,any1,any2,any3,any4,any5,any6,tl_has10,10
+stable,tl_has10,any1,any2,any3,any4,any5,any6,any7,10
+
+# future state 11, color 0, stores 0
+tl_has0,any0,any1,0,stable,stable,any5,any6,any7,11
+tl_has0,any0,any1,any2,any3,oc_has0,any5,any6,any7,11
+# future state 12, color 0, stores 1
+tl_has0,any0,any1,1,stable,stable,any5,any6,any7,12
+tl_has0,any0,any1,any2,any3,oc_has1,any5,any6,any7,12
+# future state 13, color 0, stores 2
+tl_has0,any0,any1,2,stable,stable,any5,any6,any7,13
+tl_has0,any0,any1,any2,any3,oc_has2,any5,any6,any7,13
+# future state 14, color 0, stores 3
+tl_has0,any0,any1,3,stable,stable,any5,any6,any7,14
+tl_has0,any0,any1,any2,any3,oc_has3,any5,any6,any7,14
+# future state 15, color 0, stores 4
+tl_has0,any0,any1,4,stable,stable,any5,any6,any7,15
+tl_has0,any0,any1,any2,any3,oc_has4,any5,any6,any7,15
+# future state 16, color 0, stores 5
+tl_has0,any0,any1,5,stable,stable,any5,any6,any7,16
+tl_has0,any0,any1,any2,any3,oc_has5,any5,any6,any7,16
+# future state 17, color 0, stores 6
+tl_has0,any0,any1,6,stable,stable,any5,any6,any7,17
+tl_has0,any0,any1,any2,any3,oc_has6,any5,any6,any7,17
+# future state 18, color 0, stores 7
+tl_has0,any0,any1,7,stable,stable,any5,any6,any7,18
+tl_has0,any0,any1,any2,any3,oc_has7,any5,any6,any7,18
+# future state 19, color 0, stores 8
+tl_has0,any0,any1,8,stable,stable,any5,any6,any7,19
+tl_has0,any0,any1,any2,any3,oc_has8,any5,any6,any7,19
+# future state 20, color 0, stores 9
+tl_has0,any0,any1,9,stable,stable,any5,any6,any7,20
+tl_has0,any0,any1,any2,any3,oc_has9,any5,any6,any7,20
+# future state 21, color 0, stores 10
+tl_has0,any0,any1,10,stable,stable,any5,any6,any7,21
+tl_has0,any0,any1,any2,any3,oc_has10,any5,any6,any7,21
+# future state 22, color 1, stores 0
+tl_has1,any0,any1,0,stable,stable,any5,any6,any7,22
+tl_has1,any0,any1,any2,any3,oc_has0,any5,any6,any7,22
+# future state 23, color 1, stores 1
+tl_has1,any0,any1,1,stable,stable,any5,any6,any7,23
+tl_has1,any0,any1,any2,any3,oc_has1,any5,any6,any7,23
+# future state 24, color 1, stores 2
+tl_has1,any0,any1,2,stable,stable,any5,any6,any7,24
+tl_has1,any0,any1,any2,any3,oc_has2,any5,any6,any7,24
+# future state 25, color 1, stores 3
+tl_has1,any0,any1,3,stable,stable,any5,any6,any7,25
+tl_has1,any0,any1,any2,any3,oc_has3,any5,any6,any7,25
+# future state 26, color 1, stores 4
+tl_has1,any0,any1,4,stable,stable,any5,any6,any7,26
+tl_has1,any0,any1,any2,any3,oc_has4,any5,any6,any7,26
+# future state 27, color 1, stores 5
+tl_has1,any0,any1,5,stable,stable,any5,any6,any7,27
+tl_has1,any0,any1,any2,any3,oc_has5,any5,any6,any7,27
+# future state 28, color 1, stores 6
+tl_has1,any0,any1,6,stable,stable,any5,any6,any7,28
+tl_has1,any0,any1,any2,any3,oc_has6,any5,any6,any7,28
+# future state 29, color 1, stores 7
+tl_has1,any0,any1,7,stable,stable,any5,any6,any7,29
+tl_has1,any0,any1,any2,any3,oc_has7,any5,any6,any7,29
+# future state 30, color 1, stores 8
+tl_has1,any0,any1,8,stable,stable,any5,any6,any7,30
+tl_has1,any0,any1,any2,any3,oc_has8,any5,any6,any7,30
+# future state 31, color 1, stores 9
+tl_has1,any0,any1,9,stable,stable,any5,any6,any7,31
+tl_has1,any0,any1,any2,any3,oc_has9,any5,any6,any7,31
+# future state 32, color 1, stores 10
+tl_has1,any0,any1,10,stable,stable,any5,any6,any7,32
+tl_has1,any0,any1,any2,any3,oc_has10,any5,any6,any7,32
+# future state 33, color 2, stores 0
+tl_has2,any0,any1,0,stable,stable,any5,any6,any7,33
+tl_has2,any0,any1,any2,any3,oc_has0,any5,any6,any7,33
+# future state 34, color 2, stores 1
+tl_has2,any0,any1,1,stable,stable,any5,any6,any7,34
+tl_has2,any0,any1,any2,any3,oc_has1,any5,any6,any7,34
+# future state 35, color 2, stores 2
+tl_has2,any0,any1,2,stable,stable,any5,any6,any7,35
+tl_has2,any0,any1,any2,any3,oc_has2,any5,any6,any7,35
+# future state 36, color 2, stores 3
+tl_has2,any0,any1,3,stable,stable,any5,any6,any7,36
+tl_has2,any0,any1,any2,any3,oc_has3,any5,any6,any7,36
+# future state 37, color 2, stores 4
+tl_has2,any0,any1,4,stable,stable,any5,any6,any7,37
+tl_has2,any0,any1,any2,any3,oc_has4,any5,any6,any7,37
+# future state 38, color 2, stores 5
+tl_has2,any0,any1,5,stable,stable,any5,any6,any7,38
+tl_has2,any0,any1,any2,any3,oc_has5,any5,any6,any7,38
+# future state 39, color 2, stores 6
+tl_has2,any0,any1,6,stable,stable,any5,any6,any7,39
+tl_has2,any0,any1,any2,any3,oc_has6,any5,any6,any7,39
+# future state 40, color 2, stores 7
+tl_has2,any0,any1,7,stable,stable,any5,any6,any7,40
+tl_has2,any0,any1,any2,any3,oc_has7,any5,any6,any7,40
+# future state 41, color 2, stores 8
+tl_has2,any0,any1,8,stable,stable,any5,any6,any7,41
+tl_has2,any0,any1,any2,any3,oc_has8,any5,any6,any7,41
+# future state 42, color 2, stores 9
+tl_has2,any0,any1,9,stable,stable,any5,any6,any7,42
+tl_has2,any0,any1,any2,any3,oc_has9,any5,any6,any7,42
+# future state 43, color 2, stores 10
+tl_has2,any0,any1,10,stable,stable,any5,any6,any7,43
+tl_has2,any0,any1,any2,any3,oc_has10,any5,any6,any7,43
+# future state 44, color 3, stores 0
+tl_has3,any0,any1,0,stable,stable,any5,any6,any7,44
+tl_has3,any0,any1,any2,any3,oc_has0,any5,any6,any7,44
+# future state 45, color 3, stores 1
+tl_has3,any0,any1,1,stable,stable,any5,any6,any7,45
+tl_has3,any0,any1,any2,any3,oc_has1,any5,any6,any7,45
+# future state 46, color 3, stores 2
+tl_has3,any0,any1,2,stable,stable,any5,any6,any7,46
+tl_has3,any0,any1,any2,any3,oc_has2,any5,any6,any7,46
+# future state 47, color 3, stores 3
+tl_has3,any0,any1,3,stable,stable,any5,any6,any7,47
+tl_has3,any0,any1,any2,any3,oc_has3,any5,any6,any7,47
+# future state 48, color 3, stores 4
+tl_has3,any0,any1,4,stable,stable,any5,any6,any7,48
+tl_has3,any0,any1,any2,any3,oc_has4,any5,any6,any7,48
+# future state 49, color 3, stores 5
+tl_has3,any0,any1,5,stable,stable,any5,any6,any7,49
+tl_has3,any0,any1,any2,any3,oc_has5,any5,any6,any7,49
+# future state 50, color 3, stores 6
+tl_has3,any0,any1,6,stable,stable,any5,any6,any7,50
+tl_has3,any0,any1,any2,any3,oc_has6,any5,any6,any7,50
+# future state 51, color 3, stores 7
+tl_has3,any0,any1,7,stable,stable,any5,any6,any7,51
+tl_has3,any0,any1,any2,any3,oc_has7,any5,any6,any7,51
+# future state 52, color 3, stores 8
+tl_has3,any0,any1,8,stable,stable,any5,any6,any7,52
+tl_has3,any0,any1,any2,any3,oc_has8,any5,any6,any7,52
+# future state 53, color 3, stores 9
+tl_has3,any0,any1,9,stable,stable,any5,any6,any7,53
+tl_has3,any0,any1,any2,any3,oc_has9,any5,any6,any7,53
+# future state 54, color 3, stores 10
+tl_has3,any0,any1,10,stable,stable,any5,any6,any7,54
+tl_has3,any0,any1,any2,any3,oc_has10,any5,any6,any7,54
+# future state 55, color 4, stores 0
+tl_has4,any0,any1,0,stable,stable,any5,any6,any7,55
+tl_has4,any0,any1,any2,any3,oc_has0,any5,any6,any7,55
+# future state 56, color 4, stores 1
+tl_has4,any0,any1,1,stable,stable,any5,any6,any7,56
+tl_has4,any0,any1,any2,any3,oc_has1,any5,any6,any7,56
+# future state 57, color 4, stores 2
+tl_has4,any0,any1,2,stable,stable,any5,any6,any7,57
+tl_has4,any0,any1,any2,any3,oc_has2,any5,any6,any7,57
+# future state 58, color 4, stores 3
+tl_has4,any0,any1,3,stable,stable,any5,any6,any7,58
+tl_has4,any0,any1,any2,any3,oc_has3,any5,any6,any7,58
+# future state 59, color 4, stores 4
+tl_has4,any0,any1,4,stable,stable,any5,any6,any7,59
+tl_has4,any0,any1,any2,any3,oc_has4,any5,any6,any7,59
+# future state 60, color 4, stores 5
+tl_has4,any0,any1,5,stable,stable,any5,any6,any7,60
+tl_has4,any0,any1,any2,any3,oc_has5,any5,any6,any7,60
+# future state 61, color 4, stores 6
+tl_has4,any0,any1,6,stable,stable,any5,any6,any7,61
+tl_has4,any0,any1,any2,any3,oc_has6,any5,any6,any7,61
+# future state 62, color 4, stores 7
+tl_has4,any0,any1,7,stable,stable,any5,any6,any7,62
+tl_has4,any0,any1,any2,any3,oc_has7,any5,any6,any7,62
+# future state 63, color 4, stores 8
+tl_has4,any0,any1,8,stable,stable,any5,any6,any7,63
+tl_has4,any0,any1,any2,any3,oc_has8,any5,any6,any7,63
+# future state 64, color 4, stores 9
+tl_has4,any0,any1,9,stable,stable,any5,any6,any7,64
+tl_has4,any0,any1,any2,any3,oc_has9,any5,any6,any7,64
+# future state 65, color 4, stores 10
+tl_has4,any0,any1,10,stable,stable,any5,any6,any7,65
+tl_has4,any0,any1,any2,any3,oc_has10,any5,any6,any7,65
+# future state 66, color 5, stores 0
+tl_has5,any0,any1,0,stable,stable,any5,any6,any7,66
+tl_has5,any0,any1,any2,any3,oc_has0,any5,any6,any7,66
+# future state 67, color 5, stores 1
+tl_has5,any0,any1,1,stable,stable,any5,any6,any7,67
+tl_has5,any0,any1,any2,any3,oc_has1,any5,any6,any7,67
+# future state 68, color 5, stores 2
+tl_has5,any0,any1,2,stable,stable,any5,any6,any7,68
+tl_has5,any0,any1,any2,any3,oc_has2,any5,any6,any7,68
+# future state 69, color 5, stores 3
+tl_has5,any0,any1,3,stable,stable,any5,any6,any7,69
+tl_has5,any0,any1,any2,any3,oc_has3,any5,any6,any7,69
+# future state 70, color 5, stores 4
+tl_has5,any0,any1,4,stable,stable,any5,any6,any7,70
+tl_has5,any0,any1,any2,any3,oc_has4,any5,any6,any7,70
+# future state 71, color 5, stores 5
+tl_has5,any0,any1,5,stable,stable,any5,any6,any7,71
+tl_has5,any0,any1,any2,any3,oc_has5,any5,any6,any7,71
+# future state 72, color 5, stores 6
+tl_has5,any0,any1,6,stable,stable,any5,any6,any7,72
+tl_has5,any0,any1,any2,any3,oc_has6,any5,any6,any7,72
+# future state 73, color 5, stores 7
+tl_has5,any0,any1,7,stable,stable,any5,any6,any7,73
+tl_has5,any0,any1,any2,any3,oc_has7,any5,any6,any7,73
+# future state 74, color 5, stores 8
+tl_has5,any0,any1,8,stable,stable,any5,any6,any7,74
+tl_has5,any0,any1,any2,any3,oc_has8,any5,any6,any7,74
+# future state 75, color 5, stores 9
+tl_has5,any0,any1,9,stable,stable,any5,any6,any7,75
+tl_has5,any0,any1,any2,any3,oc_has9,any5,any6,any7,75
+# future state 76, color 5, stores 10
+tl_has5,any0,any1,10,stable,stable,any5,any6,any7,76
+tl_has5,any0,any1,any2,any3,oc_has10,any5,any6,any7,76
+# future state 77, color 6, stores 0
+tl_has6,any0,any1,0,stable,stable,any5,any6,any7,77
+tl_has6,any0,any1,any2,any3,oc_has0,any5,any6,any7,77
+# future state 78, color 6, stores 1
+tl_has6,any0,any1,1,stable,stable,any5,any6,any7,78
+tl_has6,any0,any1,any2,any3,oc_has1,any5,any6,any7,78
+# future state 79, color 6, stores 2
+tl_has6,any0,any1,2,stable,stable,any5,any6,any7,79
+tl_has6,any0,any1,any2,any3,oc_has2,any5,any6,any7,79
+# future state 80, color 6, stores 3
+tl_has6,any0,any1,3,stable,stable,any5,any6,any7,80
+tl_has6,any0,any1,any2,any3,oc_has3,any5,any6,any7,80
+# future state 81, color 6, stores 4
+tl_has6,any0,any1,4,stable,stable,any5,any6,any7,81
+tl_has6,any0,any1,any2,any3,oc_has4,any5,any6,any7,81
+# future state 82, color 6, stores 5
+tl_has6,any0,any1,5,stable,stable,any5,any6,any7,82
+tl_has6,any0,any1,any2,any3,oc_has5,any5,any6,any7,82
+# future state 83, color 6, stores 6
+tl_has6,any0,any1,6,stable,stable,any5,any6,any7,83
+tl_has6,any0,any1,any2,any3,oc_has6,any5,any6,any7,83
+# future state 84, color 6, stores 7
+tl_has6,any0,any1,7,stable,stable,any5,any6,any7,84
+tl_has6,any0,any1,any2,any3,oc_has7,any5,any6,any7,84
+# future state 85, color 6, stores 8
+tl_has6,any0,any1,8,stable,stable,any5,any6,any7,85
+tl_has6,any0,any1,any2,any3,oc_has8,any5,any6,any7,85
+# future state 86, color 6, stores 9
+tl_has6,any0,any1,9,stable,stable,any5,any6,any7,86
+tl_has6,any0,any1,any2,any3,oc_has9,any5,any6,any7,86
+# future state 87, color 6, stores 10
+tl_has6,any0,any1,10,stable,stable,any5,any6,any7,87
+tl_has6,any0,any1,any2,any3,oc_has10,any5,any6,any7,87
+# future state 88, color 7, stores 0
+tl_has7,any0,any1,0,stable,stable,any5,any6,any7,88
+tl_has7,any0,any1,any2,any3,oc_has0,any5,any6,any7,88
+# future state 89, color 7, stores 1
+tl_has7,any0,any1,1,stable,stable,any5,any6,any7,89
+tl_has7,any0,any1,any2,any3,oc_has1,any5,any6,any7,89
+# future state 90, color 7, stores 2
+tl_has7,any0,any1,2,stable,stable,any5,any6,any7,90
+tl_has7,any0,any1,any2,any3,oc_has2,any5,any6,any7,90
+# future state 91, color 7, stores 3
+tl_has7,any0,any1,3,stable,stable,any5,any6,any7,91
+tl_has7,any0,any1,any2,any3,oc_has3,any5,any6,any7,91
+# future state 92, color 7, stores 4
+tl_has7,any0,any1,4,stable,stable,any5,any6,any7,92
+tl_has7,any0,any1,any2,any3,oc_has4,any5,any6,any7,92
+# future state 93, color 7, stores 5
+tl_has7,any0,any1,5,stable,stable,any5,any6,any7,93
+tl_has7,any0,any1,any2,any3,oc_has5,any5,any6,any7,93
+# future state 94, color 7, stores 6
+tl_has7,any0,any1,6,stable,stable,any5,any6,any7,94
+tl_has7,any0,any1,any2,any3,oc_has6,any5,any6,any7,94
+# future state 95, color 7, stores 7
+tl_has7,any0,any1,7,stable,stable,any5,any6,any7,95
+tl_has7,any0,any1,any2,any3,oc_has7,any5,any6,any7,95
+# future state 96, color 7, stores 8
+tl_has7,any0,any1,8,stable,stable,any5,any6,any7,96
+tl_has7,any0,any1,any2,any3,oc_has8,any5,any6,any7,96
+# future state 97, color 7, stores 9
+tl_has7,any0,any1,9,stable,stable,any5,any6,any7,97
+tl_has7,any0,any1,any2,any3,oc_has9,any5,any6,any7,97
+# future state 98, color 7, stores 10
+tl_has7,any0,any1,10,stable,stable,any5,any6,any7,98
+tl_has7,any0,any1,any2,any3,oc_has10,any5,any6,any7,98
+# future state 99, color 8, stores 0
+tl_has8,any0,any1,0,stable,stable,any5,any6,any7,99
+tl_has8,any0,any1,any2,any3,oc_has0,any5,any6,any7,99
+# future state 100, color 8, stores 1
+tl_has8,any0,any1,1,stable,stable,any5,any6,any7,100
+tl_has8,any0,any1,any2,any3,oc_has1,any5,any6,any7,100
+# future state 101, color 8, stores 2
+tl_has8,any0,any1,2,stable,stable,any5,any6,any7,101
+tl_has8,any0,any1,any2,any3,oc_has2,any5,any6,any7,101
+# future state 102, color 8, stores 3
+tl_has8,any0,any1,3,stable,stable,any5,any6,any7,102
+tl_has8,any0,any1,any2,any3,oc_has3,any5,any6,any7,102
+# future state 103, color 8, stores 4
+tl_has8,any0,any1,4,stable,stable,any5,any6,any7,103
+tl_has8,any0,any1,any2,any3,oc_has4,any5,any6,any7,103
+# future state 104, color 8, stores 5
+tl_has8,any0,any1,5,stable,stable,any5,any6,any7,104
+tl_has8,any0,any1,any2,any3,oc_has5,any5,any6,any7,104
+# future state 105, color 8, stores 6
+tl_has8,any0,any1,6,stable,stable,any5,any6,any7,105
+tl_has8,any0,any1,any2,any3,oc_has6,any5,any6,any7,105
+# future state 106, color 8, stores 7
+tl_has8,any0,any1,7,stable,stable,any5,any6,any7,106
+tl_has8,any0,any1,any2,any3,oc_has7,any5,any6,any7,106
+# future state 107, color 8, stores 8
+tl_has8,any0,any1,8,stable,stable,any5,any6,any7,107
+tl_has8,any0,any1,any2,any3,oc_has8,any5,any6,any7,107
+# future state 108, color 8, stores 9
+tl_has8,any0,any1,9,stable,stable,any5,any6,any7,108
+tl_has8,any0,any1,any2,any3,oc_has9,any5,any6,any7,108
+# future state 109, color 8, stores 10
+tl_has8,any0,any1,10,stable,stable,any5,any6,any7,109
+tl_has8,any0,any1,any2,any3,oc_has10,any5,any6,any7,109
+# future state 110, color 9, stores 0
+tl_has9,any0,any1,0,stable,stable,any5,any6,any7,110
+tl_has9,any0,any1,any2,any3,oc_has0,any5,any6,any7,110
+# future state 111, color 9, stores 1
+tl_has9,any0,any1,1,stable,stable,any5,any6,any7,111
+tl_has9,any0,any1,any2,any3,oc_has1,any5,any6,any7,111
+# future state 112, color 9, stores 2
+tl_has9,any0,any1,2,stable,stable,any5,any6,any7,112
+tl_has9,any0,any1,any2,any3,oc_has2,any5,any6,any7,112
+# future state 113, color 9, stores 3
+tl_has9,any0,any1,3,stable,stable,any5,any6,any7,113
+tl_has9,any0,any1,any2,any3,oc_has3,any5,any6,any7,113
+# future state 114, color 9, stores 4
+tl_has9,any0,any1,4,stable,stable,any5,any6,any7,114
+tl_has9,any0,any1,any2,any3,oc_has4,any5,any6,any7,114
+# future state 115, color 9, stores 5
+tl_has9,any0,any1,5,stable,stable,any5,any6,any7,115
+tl_has9,any0,any1,any2,any3,oc_has5,any5,any6,any7,115
+# future state 116, color 9, stores 6
+tl_has9,any0,any1,6,stable,stable,any5,any6,any7,116
+tl_has9,any0,any1,any2,any3,oc_has6,any5,any6,any7,116
+# future state 117, color 9, stores 7
+tl_has9,any0,any1,7,stable,stable,any5,any6,any7,117
+tl_has9,any0,any1,any2,any3,oc_has7,any5,any6,any7,117
+# future state 118, color 9, stores 8
+tl_has9,any0,any1,8,stable,stable,any5,any6,any7,118
+tl_has9,any0,any1,any2,any3,oc_has8,any5,any6,any7,118
+# future state 119, color 9, stores 9
+tl_has9,any0,any1,9,stable,stable,any5,any6,any7,119
+tl_has9,any0,any1,any2,any3,oc_has9,any5,any6,any7,119
+# future state 120, color 9, stores 10
+tl_has9,any0,any1,10,stable,stable,any5,any6,any7,120
+tl_has9,any0,any1,any2,any3,oc_has10,any5,any6,any7,120
+# future state 121, color 10, stores 0
+tl_has10,any0,any1,0,stable,stable,any5,any6,any7,121
+tl_has10,any0,any1,any2,any3,oc_has0,any5,any6,any7,121
+# future state 122, color 10, stores 1
+tl_has10,any0,any1,1,stable,stable,any5,any6,any7,122
+tl_has10,any0,any1,any2,any3,oc_has1,any5,any6,any7,122
+# future state 123, color 10, stores 2
+tl_has10,any0,any1,2,stable,stable,any5,any6,any7,123
+tl_has10,any0,any1,any2,any3,oc_has2,any5,any6,any7,123
+# future state 124, color 10, stores 3
+tl_has10,any0,any1,3,stable,stable,any5,any6,any7,124
+tl_has10,any0,any1,any2,any3,oc_has3,any5,any6,any7,124
+# future state 125, color 10, stores 4
+tl_has10,any0,any1,4,stable,stable,any5,any6,any7,125
+tl_has10,any0,any1,any2,any3,oc_has4,any5,any6,any7,125
+# future state 126, color 10, stores 5
+tl_has10,any0,any1,5,stable,stable,any5,any6,any7,126
+tl_has10,any0,any1,any2,any3,oc_has5,any5,any6,any7,126
+# future state 127, color 10, stores 6
+tl_has10,any0,any1,6,stable,stable,any5,any6,any7,127
+tl_has10,any0,any1,any2,any3,oc_has6,any5,any6,any7,127
+# future state 128, color 10, stores 7
+tl_has10,any0,any1,7,stable,stable,any5,any6,any7,128
+tl_has10,any0,any1,any2,any3,oc_has7,any5,any6,any7,128
+# future state 129, color 10, stores 8
+tl_has10,any0,any1,8,stable,stable,any5,any6,any7,129
+tl_has10,any0,any1,any2,any3,oc_has8,any5,any6,any7,129
+# future state 130, color 10, stores 9
+tl_has10,any0,any1,9,stable,stable,any5,any6,any7,130
+tl_has10,any0,any1,any2,any3,oc_has9,any5,any6,any7,130
+# future state 131, color 10, stores 10
+tl_has10,any0,any1,10,stable,stable,any5,any6,any7,131
+tl_has10,any0,any1,any2,any3,oc_has10,any5,any6,any7,131
+# next state 132, color 0, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has0,any7,132
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has0,132
+oc_is0,tl_has0,stable,stable,any3,any4,any5,any6,any7,132
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has0,132
+oc,tl_has0,any1,oc_has0,any3,any4,any5,any6,any7,132
+
+# next state 143, color 1, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has1,any7,143
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has1,143
+oc_is0,tl_has1,stable,stable,any3,any4,any5,any6,any7,143
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has1,143
+oc,tl_has1,any1,oc_has0,any3,any4,any5,any6,any7,143
+
+# next state 154, color 2, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has2,any7,154
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has2,154
+oc_is0,tl_has2,stable,stable,any3,any4,any5,any6,any7,154
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has2,154
+oc,tl_has2,any1,oc_has0,any3,any4,any5,any6,any7,154
+
+# next state 165, color 3, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has3,any7,165
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has3,165
+oc_is0,tl_has3,stable,stable,any3,any4,any5,any6,any7,165
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has3,165
+oc,tl_has3,any1,oc_has0,any3,any4,any5,any6,any7,165
+
+# next state 176, color 4, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has4,any7,176
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has4,176
+oc_is0,tl_has4,stable,stable,any3,any4,any5,any6,any7,176
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has4,176
+oc,tl_has4,any1,oc_has0,any3,any4,any5,any6,any7,176
+
+# next state 187, color 5, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has5,any7,187
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has5,187
+oc_is0,tl_has5,stable,stable,any3,any4,any5,any6,any7,187
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has5,187
+oc,tl_has5,any1,oc_has0,any3,any4,any5,any6,any7,187
+
+# next state 198, color 6, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has6,any7,198
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has6,198
+oc_is0,tl_has6,stable,stable,any3,any4,any5,any6,any7,198
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has6,198
+oc,tl_has6,any1,oc_has0,any3,any4,any5,any6,any7,198
+
+# next state 209, color 7, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has7,any7,209
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has7,209
+oc_is0,tl_has7,stable,stable,any3,any4,any5,any6,any7,209
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has7,209
+oc,tl_has7,any1,oc_has0,any3,any4,any5,any6,any7,209
+
+# next state 220, color 8, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has8,any7,220
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has8,220
+oc_is0,tl_has8,stable,stable,any3,any4,any5,any6,any7,220
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has8,220
+oc,tl_has8,any1,oc_has0,any3,any4,any5,any6,any7,220
+
+# next state 231, color 9, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has9,any7,231
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has9,231
+oc_is0,tl_has9,stable,stable,any3,any4,any5,any6,any7,231
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has9,231
+oc,tl_has9,any1,oc_has0,any3,any4,any5,any6,any7,231
+
+# next state 242, color 10, stores 0
+oc_is0,any0, any1,any2,any3,any4,any5,tl_has10,any7,242
+oc_is0,stable,any1,any2,any3,any4,any5,any6,tl_has10,242
+oc_is0,tl_has10,stable,stable,any3,any4,any5,any6,any7,242
+oc,oc_has0,any1,any2,any3,any4,any5,any6,tl_has10,242
+oc,tl_has10,any1,oc_has0,any3,any4,any5,any6,any7,242
+
+# next state 133, color 0, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has0,any7,133
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has0,133
+oc_is1,tl_has0,stable,stable,any3,any4,any5,any6,any7,133
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has0,133
+oc,tl_has0,any1,oc_has1,any3,any4,any5,any6,any7,133
+
+# next state 144, color 1, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has1,any7,144
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has1,144
+oc_is1,tl_has1,stable,stable,any3,any4,any5,any6,any7,144
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has1,144
+oc,tl_has1,any1,oc_has1,any3,any4,any5,any6,any7,144
+
+# next state 155, color 2, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has2,any7,155
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has2,155
+oc_is1,tl_has2,stable,stable,any3,any4,any5,any6,any7,155
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has2,155
+oc,tl_has2,any1,oc_has1,any3,any4,any5,any6,any7,155
+
+# next state 166, color 3, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has3,any7,166
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has3,166
+oc_is1,tl_has3,stable,stable,any3,any4,any5,any6,any7,166
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has3,166
+oc,tl_has3,any1,oc_has1,any3,any4,any5,any6,any7,166
+
+# next state 177, color 4, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has4,any7,177
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has4,177
+oc_is1,tl_has4,stable,stable,any3,any4,any5,any6,any7,177
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has4,177
+oc,tl_has4,any1,oc_has1,any3,any4,any5,any6,any7,177
+
+# next state 188, color 5, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has5,any7,188
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has5,188
+oc_is1,tl_has5,stable,stable,any3,any4,any5,any6,any7,188
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has5,188
+oc,tl_has5,any1,oc_has1,any3,any4,any5,any6,any7,188
+
+# next state 199, color 6, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has6,any7,199
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has6,199
+oc_is1,tl_has6,stable,stable,any3,any4,any5,any6,any7,199
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has6,199
+oc,tl_has6,any1,oc_has1,any3,any4,any5,any6,any7,199
+
+# next state 210, color 7, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has7,any7,210
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has7,210
+oc_is1,tl_has7,stable,stable,any3,any4,any5,any6,any7,210
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has7,210
+oc,tl_has7,any1,oc_has1,any3,any4,any5,any6,any7,210
+
+# next state 221, color 8, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has8,any7,221
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has8,221
+oc_is1,tl_has8,stable,stable,any3,any4,any5,any6,any7,221
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has8,221
+oc,tl_has8,any1,oc_has1,any3,any4,any5,any6,any7,221
+
+# next state 232, color 9, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has9,any7,232
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has9,232
+oc_is1,tl_has9,stable,stable,any3,any4,any5,any6,any7,232
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has9,232
+oc,tl_has9,any1,oc_has1,any3,any4,any5,any6,any7,232
+
+# next state 243, color 10, stores 1
+oc_is1,any0, any1,any2,any3,any4,any5,tl_has10,any7,243
+oc_is1,stable,any1,any2,any3,any4,any5,any6,tl_has10,243
+oc_is1,tl_has10,stable,stable,any3,any4,any5,any6,any7,243
+oc,oc_has1,any1,any2,any3,any4,any5,any6,tl_has10,243
+oc,tl_has10,any1,oc_has1,any3,any4,any5,any6,any7,243
+
+# next state 134, color 0, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has0,any7,134
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has0,134
+oc_is2,tl_has0,stable,stable,any3,any4,any5,any6,any7,134
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has0,134
+oc,tl_has0,any1,oc_has2,any3,any4,any5,any6,any7,134
+
+# next state 145, color 1, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has1,any7,145
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has1,145
+oc_is2,tl_has1,stable,stable,any3,any4,any5,any6,any7,145
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has1,145
+oc,tl_has1,any1,oc_has2,any3,any4,any5,any6,any7,145
+
+# next state 156, color 2, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has2,any7,156
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has2,156
+oc_is2,tl_has2,stable,stable,any3,any4,any5,any6,any7,156
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has2,156
+oc,tl_has2,any1,oc_has2,any3,any4,any5,any6,any7,156
+
+# next state 167, color 3, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has3,any7,167
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has3,167
+oc_is2,tl_has3,stable,stable,any3,any4,any5,any6,any7,167
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has3,167
+oc,tl_has3,any1,oc_has2,any3,any4,any5,any6,any7,167
+
+# next state 178, color 4, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has4,any7,178
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has4,178
+oc_is2,tl_has4,stable,stable,any3,any4,any5,any6,any7,178
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has4,178
+oc,tl_has4,any1,oc_has2,any3,any4,any5,any6,any7,178
+
+# next state 189, color 5, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has5,any7,189
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has5,189
+oc_is2,tl_has5,stable,stable,any3,any4,any5,any6,any7,189
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has5,189
+oc,tl_has5,any1,oc_has2,any3,any4,any5,any6,any7,189
+
+# next state 200, color 6, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has6,any7,200
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has6,200
+oc_is2,tl_has6,stable,stable,any3,any4,any5,any6,any7,200
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has6,200
+oc,tl_has6,any1,oc_has2,any3,any4,any5,any6,any7,200
+
+# next state 211, color 7, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has7,any7,211
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has7,211
+oc_is2,tl_has7,stable,stable,any3,any4,any5,any6,any7,211
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has7,211
+oc,tl_has7,any1,oc_has2,any3,any4,any5,any6,any7,211
+
+# next state 222, color 8, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has8,any7,222
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has8,222
+oc_is2,tl_has8,stable,stable,any3,any4,any5,any6,any7,222
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has8,222
+oc,tl_has8,any1,oc_has2,any3,any4,any5,any6,any7,222
+
+# next state 233, color 9, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has9,any7,233
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has9,233
+oc_is2,tl_has9,stable,stable,any3,any4,any5,any6,any7,233
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has9,233
+oc,tl_has9,any1,oc_has2,any3,any4,any5,any6,any7,233
+
+# next state 244, color 10, stores 2
+oc_is2,any0, any1,any2,any3,any4,any5,tl_has10,any7,244
+oc_is2,stable,any1,any2,any3,any4,any5,any6,tl_has10,244
+oc_is2,tl_has10,stable,stable,any3,any4,any5,any6,any7,244
+oc,oc_has2,any1,any2,any3,any4,any5,any6,tl_has10,244
+oc,tl_has10,any1,oc_has2,any3,any4,any5,any6,any7,244
+
+# next state 135, color 0, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has0,any7,135
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has0,135
+oc_is3,tl_has0,stable,stable,any3,any4,any5,any6,any7,135
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has0,135
+oc,tl_has0,any1,oc_has3,any3,any4,any5,any6,any7,135
+
+# next state 146, color 1, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has1,any7,146
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has1,146
+oc_is3,tl_has1,stable,stable,any3,any4,any5,any6,any7,146
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has1,146
+oc,tl_has1,any1,oc_has3,any3,any4,any5,any6,any7,146
+
+# next state 157, color 2, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has2,any7,157
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has2,157
+oc_is3,tl_has2,stable,stable,any3,any4,any5,any6,any7,157
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has2,157
+oc,tl_has2,any1,oc_has3,any3,any4,any5,any6,any7,157
+
+# next state 168, color 3, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has3,any7,168
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has3,168
+oc_is3,tl_has3,stable,stable,any3,any4,any5,any6,any7,168
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has3,168
+oc,tl_has3,any1,oc_has3,any3,any4,any5,any6,any7,168
+
+# next state 179, color 4, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has4,any7,179
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has4,179
+oc_is3,tl_has4,stable,stable,any3,any4,any5,any6,any7,179
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has4,179
+oc,tl_has4,any1,oc_has3,any3,any4,any5,any6,any7,179
+
+# next state 190, color 5, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has5,any7,190
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has5,190
+oc_is3,tl_has5,stable,stable,any3,any4,any5,any6,any7,190
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has5,190
+oc,tl_has5,any1,oc_has3,any3,any4,any5,any6,any7,190
+
+# next state 201, color 6, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has6,any7,201
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has6,201
+oc_is3,tl_has6,stable,stable,any3,any4,any5,any6,any7,201
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has6,201
+oc,tl_has6,any1,oc_has3,any3,any4,any5,any6,any7,201
+
+# next state 212, color 7, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has7,any7,212
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has7,212
+oc_is3,tl_has7,stable,stable,any3,any4,any5,any6,any7,212
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has7,212
+oc,tl_has7,any1,oc_has3,any3,any4,any5,any6,any7,212
+
+# next state 223, color 8, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has8,any7,223
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has8,223
+oc_is3,tl_has8,stable,stable,any3,any4,any5,any6,any7,223
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has8,223
+oc,tl_has8,any1,oc_has3,any3,any4,any5,any6,any7,223
+
+# next state 234, color 9, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has9,any7,234
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has9,234
+oc_is3,tl_has9,stable,stable,any3,any4,any5,any6,any7,234
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has9,234
+oc,tl_has9,any1,oc_has3,any3,any4,any5,any6,any7,234
+
+# next state 245, color 10, stores 3
+oc_is3,any0, any1,any2,any3,any4,any5,tl_has10,any7,245
+oc_is3,stable,any1,any2,any3,any4,any5,any6,tl_has10,245
+oc_is3,tl_has10,stable,stable,any3,any4,any5,any6,any7,245
+oc,oc_has3,any1,any2,any3,any4,any5,any6,tl_has10,245
+oc,tl_has10,any1,oc_has3,any3,any4,any5,any6,any7,245
+
+# next state 136, color 0, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has0,any7,136
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has0,136
+oc_is4,tl_has0,stable,stable,any3,any4,any5,any6,any7,136
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has0,136
+oc,tl_has0,any1,oc_has4,any3,any4,any5,any6,any7,136
+
+# next state 147, color 1, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has1,any7,147
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has1,147
+oc_is4,tl_has1,stable,stable,any3,any4,any5,any6,any7,147
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has1,147
+oc,tl_has1,any1,oc_has4,any3,any4,any5,any6,any7,147
+
+# next state 158, color 2, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has2,any7,158
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has2,158
+oc_is4,tl_has2,stable,stable,any3,any4,any5,any6,any7,158
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has2,158
+oc,tl_has2,any1,oc_has4,any3,any4,any5,any6,any7,158
+
+# next state 169, color 3, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has3,any7,169
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has3,169
+oc_is4,tl_has3,stable,stable,any3,any4,any5,any6,any7,169
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has3,169
+oc,tl_has3,any1,oc_has4,any3,any4,any5,any6,any7,169
+
+# next state 180, color 4, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has4,any7,180
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has4,180
+oc_is4,tl_has4,stable,stable,any3,any4,any5,any6,any7,180
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has4,180
+oc,tl_has4,any1,oc_has4,any3,any4,any5,any6,any7,180
+
+# next state 191, color 5, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has5,any7,191
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has5,191
+oc_is4,tl_has5,stable,stable,any3,any4,any5,any6,any7,191
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has5,191
+oc,tl_has5,any1,oc_has4,any3,any4,any5,any6,any7,191
+
+# next state 202, color 6, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has6,any7,202
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has6,202
+oc_is4,tl_has6,stable,stable,any3,any4,any5,any6,any7,202
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has6,202
+oc,tl_has6,any1,oc_has4,any3,any4,any5,any6,any7,202
+
+# next state 213, color 7, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has7,any7,213
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has7,213
+oc_is4,tl_has7,stable,stable,any3,any4,any5,any6,any7,213
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has7,213
+oc,tl_has7,any1,oc_has4,any3,any4,any5,any6,any7,213
+
+# next state 224, color 8, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has8,any7,224
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has8,224
+oc_is4,tl_has8,stable,stable,any3,any4,any5,any6,any7,224
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has8,224
+oc,tl_has8,any1,oc_has4,any3,any4,any5,any6,any7,224
+
+# next state 235, color 9, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has9,any7,235
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has9,235
+oc_is4,tl_has9,stable,stable,any3,any4,any5,any6,any7,235
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has9,235
+oc,tl_has9,any1,oc_has4,any3,any4,any5,any6,any7,235
+
+# next state 246, color 10, stores 4
+oc_is4,any0, any1,any2,any3,any4,any5,tl_has10,any7,246
+oc_is4,stable,any1,any2,any3,any4,any5,any6,tl_has10,246
+oc_is4,tl_has10,stable,stable,any3,any4,any5,any6,any7,246
+oc,oc_has4,any1,any2,any3,any4,any5,any6,tl_has10,246
+oc,tl_has10,any1,oc_has4,any3,any4,any5,any6,any7,246
+
+# next state 137, color 0, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has0,any7,137
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has0,137
+oc_is5,tl_has0,stable,stable,any3,any4,any5,any6,any7,137
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has0,137
+oc,tl_has0,any1,oc_has5,any3,any4,any5,any6,any7,137
+
+# next state 148, color 1, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has1,any7,148
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has1,148
+oc_is5,tl_has1,stable,stable,any3,any4,any5,any6,any7,148
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has1,148
+oc,tl_has1,any1,oc_has5,any3,any4,any5,any6,any7,148
+
+# next state 159, color 2, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has2,any7,159
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has2,159
+oc_is5,tl_has2,stable,stable,any3,any4,any5,any6,any7,159
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has2,159
+oc,tl_has2,any1,oc_has5,any3,any4,any5,any6,any7,159
+
+# next state 170, color 3, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has3,any7,170
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has3,170
+oc_is5,tl_has3,stable,stable,any3,any4,any5,any6,any7,170
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has3,170
+oc,tl_has3,any1,oc_has5,any3,any4,any5,any6,any7,170
+
+# next state 181, color 4, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has4,any7,181
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has4,181
+oc_is5,tl_has4,stable,stable,any3,any4,any5,any6,any7,181
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has4,181
+oc,tl_has4,any1,oc_has5,any3,any4,any5,any6,any7,181
+
+# next state 192, color 5, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has5,any7,192
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has5,192
+oc_is5,tl_has5,stable,stable,any3,any4,any5,any6,any7,192
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has5,192
+oc,tl_has5,any1,oc_has5,any3,any4,any5,any6,any7,192
+
+# next state 203, color 6, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has6,any7,203
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has6,203
+oc_is5,tl_has6,stable,stable,any3,any4,any5,any6,any7,203
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has6,203
+oc,tl_has6,any1,oc_has5,any3,any4,any5,any6,any7,203
+
+# next state 214, color 7, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has7,any7,214
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has7,214
+oc_is5,tl_has7,stable,stable,any3,any4,any5,any6,any7,214
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has7,214
+oc,tl_has7,any1,oc_has5,any3,any4,any5,any6,any7,214
+
+# next state 225, color 8, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has8,any7,225
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has8,225
+oc_is5,tl_has8,stable,stable,any3,any4,any5,any6,any7,225
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has8,225
+oc,tl_has8,any1,oc_has5,any3,any4,any5,any6,any7,225
+
+# next state 236, color 9, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has9,any7,236
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has9,236
+oc_is5,tl_has9,stable,stable,any3,any4,any5,any6,any7,236
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has9,236
+oc,tl_has9,any1,oc_has5,any3,any4,any5,any6,any7,236
+
+# next state 247, color 10, stores 5
+oc_is5,any0, any1,any2,any3,any4,any5,tl_has10,any7,247
+oc_is5,stable,any1,any2,any3,any4,any5,any6,tl_has10,247
+oc_is5,tl_has10,stable,stable,any3,any4,any5,any6,any7,247
+oc,oc_has5,any1,any2,any3,any4,any5,any6,tl_has10,247
+oc,tl_has10,any1,oc_has5,any3,any4,any5,any6,any7,247
+
+# next state 138, color 0, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has0,any7,138
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has0,138
+oc_is6,tl_has0,stable,stable,any3,any4,any5,any6,any7,138
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has0,138
+oc,tl_has0,any1,oc_has6,any3,any4,any5,any6,any7,138
+
+# next state 149, color 1, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has1,any7,149
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has1,149
+oc_is6,tl_has1,stable,stable,any3,any4,any5,any6,any7,149
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has1,149
+oc,tl_has1,any1,oc_has6,any3,any4,any5,any6,any7,149
+
+# next state 160, color 2, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has2,any7,160
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has2,160
+oc_is6,tl_has2,stable,stable,any3,any4,any5,any6,any7,160
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has2,160
+oc,tl_has2,any1,oc_has6,any3,any4,any5,any6,any7,160
+
+# next state 171, color 3, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has3,any7,171
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has3,171
+oc_is6,tl_has3,stable,stable,any3,any4,any5,any6,any7,171
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has3,171
+oc,tl_has3,any1,oc_has6,any3,any4,any5,any6,any7,171
+
+# next state 182, color 4, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has4,any7,182
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has4,182
+oc_is6,tl_has4,stable,stable,any3,any4,any5,any6,any7,182
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has4,182
+oc,tl_has4,any1,oc_has6,any3,any4,any5,any6,any7,182
+
+# next state 193, color 5, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has5,any7,193
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has5,193
+oc_is6,tl_has5,stable,stable,any3,any4,any5,any6,any7,193
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has5,193
+oc,tl_has5,any1,oc_has6,any3,any4,any5,any6,any7,193
+
+# next state 204, color 6, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has6,any7,204
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has6,204
+oc_is6,tl_has6,stable,stable,any3,any4,any5,any6,any7,204
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has6,204
+oc,tl_has6,any1,oc_has6,any3,any4,any5,any6,any7,204
+
+# next state 215, color 7, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has7,any7,215
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has7,215
+oc_is6,tl_has7,stable,stable,any3,any4,any5,any6,any7,215
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has7,215
+oc,tl_has7,any1,oc_has6,any3,any4,any5,any6,any7,215
+
+# next state 226, color 8, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has8,any7,226
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has8,226
+oc_is6,tl_has8,stable,stable,any3,any4,any5,any6,any7,226
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has8,226
+oc,tl_has8,any1,oc_has6,any3,any4,any5,any6,any7,226
+
+# next state 237, color 9, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has9,any7,237
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has9,237
+oc_is6,tl_has9,stable,stable,any3,any4,any5,any6,any7,237
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has9,237
+oc,tl_has9,any1,oc_has6,any3,any4,any5,any6,any7,237
+
+# next state 248, color 10, stores 6
+oc_is6,any0, any1,any2,any3,any4,any5,tl_has10,any7,248
+oc_is6,stable,any1,any2,any3,any4,any5,any6,tl_has10,248
+oc_is6,tl_has10,stable,stable,any3,any4,any5,any6,any7,248
+oc,oc_has6,any1,any2,any3,any4,any5,any6,tl_has10,248
+oc,tl_has10,any1,oc_has6,any3,any4,any5,any6,any7,248
+
+# next state 139, color 0, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has0,any7,139
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has0,139
+oc_is7,tl_has0,stable,stable,any3,any4,any5,any6,any7,139
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has0,139
+oc,tl_has0,any1,oc_has7,any3,any4,any5,any6,any7,139
+
+# next state 150, color 1, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has1,any7,150
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has1,150
+oc_is7,tl_has1,stable,stable,any3,any4,any5,any6,any7,150
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has1,150
+oc,tl_has1,any1,oc_has7,any3,any4,any5,any6,any7,150
+
+# next state 161, color 2, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has2,any7,161
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has2,161
+oc_is7,tl_has2,stable,stable,any3,any4,any5,any6,any7,161
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has2,161
+oc,tl_has2,any1,oc_has7,any3,any4,any5,any6,any7,161
+
+# next state 172, color 3, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has3,any7,172
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has3,172
+oc_is7,tl_has3,stable,stable,any3,any4,any5,any6,any7,172
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has3,172
+oc,tl_has3,any1,oc_has7,any3,any4,any5,any6,any7,172
+
+# next state 183, color 4, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has4,any7,183
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has4,183
+oc_is7,tl_has4,stable,stable,any3,any4,any5,any6,any7,183
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has4,183
+oc,tl_has4,any1,oc_has7,any3,any4,any5,any6,any7,183
+
+# next state 194, color 5, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has5,any7,194
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has5,194
+oc_is7,tl_has5,stable,stable,any3,any4,any5,any6,any7,194
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has5,194
+oc,tl_has5,any1,oc_has7,any3,any4,any5,any6,any7,194
+
+# next state 205, color 6, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has6,any7,205
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has6,205
+oc_is7,tl_has6,stable,stable,any3,any4,any5,any6,any7,205
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has6,205
+oc,tl_has6,any1,oc_has7,any3,any4,any5,any6,any7,205
+
+# next state 216, color 7, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has7,any7,216
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has7,216
+oc_is7,tl_has7,stable,stable,any3,any4,any5,any6,any7,216
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has7,216
+oc,tl_has7,any1,oc_has7,any3,any4,any5,any6,any7,216
+
+# next state 227, color 8, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has8,any7,227
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has8,227
+oc_is7,tl_has8,stable,stable,any3,any4,any5,any6,any7,227
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has8,227
+oc,tl_has8,any1,oc_has7,any3,any4,any5,any6,any7,227
+
+# next state 238, color 9, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has9,any7,238
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has9,238
+oc_is7,tl_has9,stable,stable,any3,any4,any5,any6,any7,238
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has9,238
+oc,tl_has9,any1,oc_has7,any3,any4,any5,any6,any7,238
+
+# next state 249, color 10, stores 7
+oc_is7,any0, any1,any2,any3,any4,any5,tl_has10,any7,249
+oc_is7,stable,any1,any2,any3,any4,any5,any6,tl_has10,249
+oc_is7,tl_has10,stable,stable,any3,any4,any5,any6,any7,249
+oc,oc_has7,any1,any2,any3,any4,any5,any6,tl_has10,249
+oc,tl_has10,any1,oc_has7,any3,any4,any5,any6,any7,249
+
+# next state 140, color 0, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has0,any7,140
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has0,140
+oc_is8,tl_has0,stable,stable,any3,any4,any5,any6,any7,140
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has0,140
+oc,tl_has0,any1,oc_has8,any3,any4,any5,any6,any7,140
+
+# next state 151, color 1, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has1,any7,151
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has1,151
+oc_is8,tl_has1,stable,stable,any3,any4,any5,any6,any7,151
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has1,151
+oc,tl_has1,any1,oc_has8,any3,any4,any5,any6,any7,151
+
+# next state 162, color 2, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has2,any7,162
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has2,162
+oc_is8,tl_has2,stable,stable,any3,any4,any5,any6,any7,162
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has2,162
+oc,tl_has2,any1,oc_has8,any3,any4,any5,any6,any7,162
+
+# next state 173, color 3, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has3,any7,173
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has3,173
+oc_is8,tl_has3,stable,stable,any3,any4,any5,any6,any7,173
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has3,173
+oc,tl_has3,any1,oc_has8,any3,any4,any5,any6,any7,173
+
+# next state 184, color 4, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has4,any7,184
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has4,184
+oc_is8,tl_has4,stable,stable,any3,any4,any5,any6,any7,184
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has4,184
+oc,tl_has4,any1,oc_has8,any3,any4,any5,any6,any7,184
+
+# next state 195, color 5, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has5,any7,195
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has5,195
+oc_is8,tl_has5,stable,stable,any3,any4,any5,any6,any7,195
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has5,195
+oc,tl_has5,any1,oc_has8,any3,any4,any5,any6,any7,195
+
+# next state 206, color 6, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has6,any7,206
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has6,206
+oc_is8,tl_has6,stable,stable,any3,any4,any5,any6,any7,206
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has6,206
+oc,tl_has6,any1,oc_has8,any3,any4,any5,any6,any7,206
+
+# next state 217, color 7, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has7,any7,217
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has7,217
+oc_is8,tl_has7,stable,stable,any3,any4,any5,any6,any7,217
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has7,217
+oc,tl_has7,any1,oc_has8,any3,any4,any5,any6,any7,217
+
+# next state 228, color 8, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has8,any7,228
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has8,228
+oc_is8,tl_has8,stable,stable,any3,any4,any5,any6,any7,228
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has8,228
+oc,tl_has8,any1,oc_has8,any3,any4,any5,any6,any7,228
+
+# next state 239, color 9, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has9,any7,239
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has9,239
+oc_is8,tl_has9,stable,stable,any3,any4,any5,any6,any7,239
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has9,239
+oc,tl_has9,any1,oc_has8,any3,any4,any5,any6,any7,239
+
+# next state 250, color 10, stores 8
+oc_is8,any0, any1,any2,any3,any4,any5,tl_has10,any7,250
+oc_is8,stable,any1,any2,any3,any4,any5,any6,tl_has10,250
+oc_is8,tl_has10,stable,stable,any3,any4,any5,any6,any7,250
+oc,oc_has8,any1,any2,any3,any4,any5,any6,tl_has10,250
+oc,tl_has10,any1,oc_has8,any3,any4,any5,any6,any7,250
+
+# next state 141, color 0, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has0,any7,141
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has0,141
+oc_is9,tl_has0,stable,stable,any3,any4,any5,any6,any7,141
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has0,141
+oc,tl_has0,any1,oc_has9,any3,any4,any5,any6,any7,141
+
+# next state 152, color 1, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has1,any7,152
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has1,152
+oc_is9,tl_has1,stable,stable,any3,any4,any5,any6,any7,152
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has1,152
+oc,tl_has1,any1,oc_has9,any3,any4,any5,any6,any7,152
+
+# next state 163, color 2, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has2,any7,163
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has2,163
+oc_is9,tl_has2,stable,stable,any3,any4,any5,any6,any7,163
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has2,163
+oc,tl_has2,any1,oc_has9,any3,any4,any5,any6,any7,163
+
+# next state 174, color 3, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has3,any7,174
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has3,174
+oc_is9,tl_has3,stable,stable,any3,any4,any5,any6,any7,174
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has3,174
+oc,tl_has3,any1,oc_has9,any3,any4,any5,any6,any7,174
+
+# next state 185, color 4, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has4,any7,185
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has4,185
+oc_is9,tl_has4,stable,stable,any3,any4,any5,any6,any7,185
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has4,185
+oc,tl_has4,any1,oc_has9,any3,any4,any5,any6,any7,185
+
+# next state 196, color 5, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has5,any7,196
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has5,196
+oc_is9,tl_has5,stable,stable,any3,any4,any5,any6,any7,196
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has5,196
+oc,tl_has5,any1,oc_has9,any3,any4,any5,any6,any7,196
+
+# next state 207, color 6, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has6,any7,207
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has6,207
+oc_is9,tl_has6,stable,stable,any3,any4,any5,any6,any7,207
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has6,207
+oc,tl_has6,any1,oc_has9,any3,any4,any5,any6,any7,207
+
+# next state 218, color 7, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has7,any7,218
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has7,218
+oc_is9,tl_has7,stable,stable,any3,any4,any5,any6,any7,218
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has7,218
+oc,tl_has7,any1,oc_has9,any3,any4,any5,any6,any7,218
+
+# next state 229, color 8, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has8,any7,229
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has8,229
+oc_is9,tl_has8,stable,stable,any3,any4,any5,any6,any7,229
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has8,229
+oc,tl_has8,any1,oc_has9,any3,any4,any5,any6,any7,229
+
+# next state 240, color 9, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has9,any7,240
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has9,240
+oc_is9,tl_has9,stable,stable,any3,any4,any5,any6,any7,240
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has9,240
+oc,tl_has9,any1,oc_has9,any3,any4,any5,any6,any7,240
+
+# next state 251, color 10, stores 9
+oc_is9,any0, any1,any2,any3,any4,any5,tl_has10,any7,251
+oc_is9,stable,any1,any2,any3,any4,any5,any6,tl_has10,251
+oc_is9,tl_has10,stable,stable,any3,any4,any5,any6,any7,251
+oc,oc_has9,any1,any2,any3,any4,any5,any6,tl_has10,251
+oc,tl_has10,any1,oc_has9,any3,any4,any5,any6,any7,251
+
+# next state 142, color 0, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has0,any7,142
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has0,142
+oc_is10,tl_has0,stable,stable,any3,any4,any5,any6,any7,142
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has0,142
+oc,tl_has0,any1,oc_has10,any3,any4,any5,any6,any7,142
+
+# next state 153, color 1, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has1,any7,153
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has1,153
+oc_is10,tl_has1,stable,stable,any3,any4,any5,any6,any7,153
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has1,153
+oc,tl_has1,any1,oc_has10,any3,any4,any5,any6,any7,153
+
+# next state 164, color 2, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has2,any7,164
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has2,164
+oc_is10,tl_has2,stable,stable,any3,any4,any5,any6,any7,164
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has2,164
+oc,tl_has2,any1,oc_has10,any3,any4,any5,any6,any7,164
+
+# next state 175, color 3, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has3,any7,175
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has3,175
+oc_is10,tl_has3,stable,stable,any3,any4,any5,any6,any7,175
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has3,175
+oc,tl_has3,any1,oc_has10,any3,any4,any5,any6,any7,175
+
+# next state 186, color 4, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has4,any7,186
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has4,186
+oc_is10,tl_has4,stable,stable,any3,any4,any5,any6,any7,186
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has4,186
+oc,tl_has4,any1,oc_has10,any3,any4,any5,any6,any7,186
+
+# next state 197, color 5, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has5,any7,197
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has5,197
+oc_is10,tl_has5,stable,stable,any3,any4,any5,any6,any7,197
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has5,197
+oc,tl_has5,any1,oc_has10,any3,any4,any5,any6,any7,197
+
+# next state 208, color 6, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has6,any7,208
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has6,208
+oc_is10,tl_has6,stable,stable,any3,any4,any5,any6,any7,208
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has6,208
+oc,tl_has6,any1,oc_has10,any3,any4,any5,any6,any7,208
+
+# next state 219, color 7, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has7,any7,219
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has7,219
+oc_is10,tl_has7,stable,stable,any3,any4,any5,any6,any7,219
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has7,219
+oc,tl_has7,any1,oc_has10,any3,any4,any5,any6,any7,219
+
+# next state 230, color 8, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has8,any7,230
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has8,230
+oc_is10,tl_has8,stable,stable,any3,any4,any5,any6,any7,230
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has8,230
+oc,tl_has8,any1,oc_has10,any3,any4,any5,any6,any7,230
+
+# next state 241, color 9, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has9,any7,241
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has9,241
+oc_is10,tl_has9,stable,stable,any3,any4,any5,any6,any7,241
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has9,241
+oc,tl_has9,any1,oc_has10,any3,any4,any5,any6,any7,241
+
+# next state 252, color 10, stores 10
+oc_is10,any0, any1,any2,any3,any4,any5,tl_has10,any7,252
+oc_is10,stable,any1,any2,any3,any4,any5,any6,tl_has10,252
+oc_is10,tl_has10,stable,stable,any3,any4,any5,any6,any7,252
+oc,oc_has10,any1,any2,any3,any4,any5,any6,tl_has10,252
+oc,tl_has10,any1,oc_has10,any3,any4,any5,any6,any7,252
+@COLORS
+0 34 40 73
+1 104 99 131
+2 147 146 141
+3 151 211 116
+4 133 200 226
+5 242 253 255
+6 102 51 88
+7 119 82 68
+8 206 109 92
+9 229 165 126
+10 239 221 139
+11 34 40 73
+12 34 40 73
+13 34 40 73
+14 34 40 73
+15 34 40 73
+16 34 40 73
+17 34 40 73
+18 34 40 73
+19 34 40 73
+20 34 40 73
+21 34 40 73
+22 104 99 131
+23 104 99 131
+24 104 99 131
+25 104 99 131
+26 104 99 131
+27 104 99 131
+28 104 99 131
+29 104 99 131
+30 104 99 131
+31 104 99 131
+32 104 99 131
+33 147 146 141
+34 147 146 141
+35 147 146 141
+36 147 146 141
+37 147 146 141
+38 147 146 141
+39 147 146 141
+40 147 146 141
+41 147 146 141
+42 147 146 141
+43 147 146 141
+44 151 211 116
+45 151 211 116
+46 151 211 116
+47 151 211 116
+48 151 211 116
+49 151 211 116
+50 151 211 116
+51 151 211 116
+52 151 211 116
+53 151 211 116
+54 151 211 116
+55 133 200 226
+56 133 200 226
+57 133 200 226
+58 133 200 226
+59 133 200 226
+60 133 200 226
+61 133 200 226
+62 133 200 226
+63 133 200 226
+64 133 200 226
+65 133 200 226
+66 242 253 255
+67 242 253 255
+68 242 253 255
+69 242 253 255
+70 242 253 255
+71 242 253 255
+72 242 253 255
+73 242 253 255
+74 242 253 255
+75 242 253 255
+76 242 253 255
+77 102 51 88
+78 102 51 88
+79 102 51 88
+80 102 51 88
+81 102 51 88
+82 102 51 88
+83 102 51 88
+84 102 51 88
+85 102 51 88
+86 102 51 88
+87 102 51 88
+88 119 82 68
+89 119 82 68
+90 119 82 68
+91 119 82 68
+92 119 82 68
+93 119 82 68
+94 119 82 68
+95 119 82 68
+96 119 82 68
+97 119 82 68
+98 119 82 68
+99 206 109 92
+100 206 109 92
+101 206 109 92
+102 206 109 92
+103 206 109 92
+104 206 109 92
+105 206 109 92
+106 206 109 92
+107 206 109 92
+108 206 109 92
+109 206 109 92
+110 229 165 126
+111 229 165 126
+112 229 165 126
+113 229 165 126
+114 229 165 126
+115 229 165 126
+116 229 165 126
+117 229 165 126
+118 229 165 126
+119 229 165 126
+120 229 165 126
+121 239 221 139
+122 239 221 139
+123 239 221 139
+124 239 221 139
+125 239 221 139
+126 239 221 139
+127 239 221 139
+128 239 221 139
+129 239 221 139
+130 239 221 139
+131 239 221 139
+132 34 40 73
+133 34 40 73
+134 34 40 73
+135 34 40 73
+136 34 40 73
+137 34 40 73
+138 34 40 73
+139 34 40 73
+140 34 40 73
+141 34 40 73
+142 34 40 73
+143 104 99 131
+144 104 99 131
+145 104 99 131
+146 104 99 131
+147 104 99 131
+148 104 99 131
+149 104 99 131
+150 104 99 131
+151 104 99 131
+152 104 99 131
+153 104 99 131
+154 147 146 141
+155 147 146 141
+156 147 146 141
+157 147 146 141
+158 147 146 141
+159 147 146 141
+160 147 146 141
+161 147 146 141
+162 147 146 141
+163 147 146 141
+164 147 146 141
+165 151 211 116
+166 151 211 116
+167 151 211 116
+168 151 211 116
+169 151 211 116
+170 151 211 116
+171 151 211 116
+172 151 211 116
+173 151 211 116
+174 151 211 116
+175 151 211 116
+176 133 200 226
+177 133 200 226
+178 133 200 226
+179 133 200 226
+180 133 200 226
+181 133 200 226
+182 133 200 226
+183 133 200 226
+184 133 200 226
+185 133 200 226
+186 133 200 226
+187 242 253 255
+188 242 253 255
+189 242 253 255
+190 242 253 255
+191 242 253 255
+192 242 253 255
+193 242 253 255
+194 242 253 255
+195 242 253 255
+196 242 253 255
+197 242 253 255
+198 102 51 88
+199 102 51 88
+200 102 51 88
+201 102 51 88
+202 102 51 88
+203 102 51 88
+204 102 51 88
+205 102 51 88
+206 102 51 88
+207 102 51 88
+208 102 51 88
+209 119 82 68
+210 119 82 68
+211 119 82 68
+212 119 82 68
+213 119 82 68
+214 119 82 68
+215 119 82 68
+216 119 82 68
+217 119 82 68
+218 119 82 68
+219 119 82 68
+220 206 109 92
+221 206 109 92
+222 206 109 92
+223 206 109 92
+224 206 109 92
+225 206 109 92
+226 206 109 92
+227 206 109 92
+228 206 109 92
+229 206 109 92
+230 206 109 92
+231 229 165 126
+232 229 165 126
+233 229 165 126
+234 229 165 126
+235 229 165 126
+236 229 165 126
+237 229 165 126
+238 229 165 126
+239 229 165 126
+240 229 165 126
+241 229 165 126
+242 239 221 139
+243 239 221 139
+244 239 221 139
+245 239 221 139
+246 239 221 139
+247 239 221 139
+248 239 221 139
+249 239 221 139
+250 239 221 139
+251 239 221 139
+252 239 221 139
+@ICONS
+XPM
+/* width height num_colors chars_per_pixel */
+"7 1757 12 1"
+/*colors*/
+". c #000000"
+"A c #222849"
+"B c #6863a3"
+"C c #93928d"
+"D c #97d374"
+"E c #85c8e2"
+"F c #f2fdff"
+"G c #663358"
+"H c #775244"
+"I c #ce6d5c"
+"J c #e5a57e"
+"K c #efdd8b"
+
+"AAAAAAA"
+"ABBABBA"
+"ABBBBBA"
+"AABBBAA"
+"ABBBBBA"
+"ABBABBA"
+"AAAAAAA"
+
+"AAAAAAA"
+"ACCACCA"
+"ACCCCCA"
+"AACCCAA"
+"ACCCCCA"
+"ACCACCA"
+"AAAAAAA"
+
+"AAAAAAA"
+"ADDADDA"
+"ADDDDDA"
+"AADDDAA"
+"ADDDDDA"
+"ADDADDA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AEEAEEA"
+"AEEEEEA"
+"AAEEEAA"
+"AEEEEEA"
+"AEEAEEA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AFFAFFA"
+"AFFFFFA"
+"AAFFFAA"
+"AFFFFFA"
+"AFFAFFA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AGGAGGA"
+"AGGGGGA"
+"AAGGGAA"
+"AGGGGGA"
+"AGGAGGA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AHHAHHA"
+"AHHHHHA"
+"AAHHHAA"
+"AHHHHHA"
+"AHHAHHA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AIIAIIA"
+"AIIIIIA"
+"AAIIIAA"
+"AIIIIIA"
+"AIIAIIA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AJJAJJA"
+"AJJJJJA"
+"AAJJJAA"
+"AJJJJJA"
+"AJJAJJA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AKKAKKA"
+"AKKKKKA"
+"AAKKKAA"
+"AKKKKKA"
+"AKKAKKA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AAAAAAA"
+"AAAAAAA"
+"AAAFAAA"
+"AAAAAAA"
+"AAAAAAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"ABBBBBA"
+"ABBBBBA"
+"ABBFBBA"
+"ABBBBBA"
+"ABBBBBA"
+"AAAAAAA"
+
+"AAAAAAA"
+"ACCCCCA"
+"ACCCCCA"
+"ACCFCCA"
+"ACCCCCA"
+"ACCCCCA"
+"AAAAAAA"
+
+"AAAAAAA"
+"ADDDDDA"
+"ADDDDDA"
+"ADDFDDA"
+"ADDDDDA"
+"ADDDDDA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AEEEEEA"
+"AEEEEEA"
+"AEEFEEA"
+"AEEEEEA"
+"AEEEEEA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AFFFFFA"
+"AFFFFFA"
+"AFFFFFA"
+"AFFFFFA"
+"AFFFFFA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AGGGGGA"
+"AGGGGGA"
+"AGGFGGA"
+"AGGGGGA"
+"AGGGGGA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AHHHHHA"
+"AHHHHHA"
+"AHHFHHA"
+"AHHHHHA"
+"AHHHHHA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AIIIIIA"
+"AIIIIIA"
+"AIIFIIA"
+"AIIIIIA"
+"AIIIIIA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AJJJJJA"
+"AJJJJJA"
+"AJJFJJA"
+"AJJJJJA"
+"AJJJJJA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AKKKKKA"
+"AKKKKKA"
+"AKKFKKA"
+"AKKKKKA"
+"AKKKKKA"
+"AAAAAAA"
+
+"BBBBBBB"
+"BAAAAAB"
+"BAAAAAB"
+"BAAFAAB"
+"BAAAAAB"
+"BAAAAAB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BBBBBBB"
+"BBBBBBB"
+"BBBFBBB"
+"BBBBBBB"
+"BBBBBBB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BCCCCCB"
+"BCCCCCB"
+"BCCFCCB"
+"BCCCCCB"
+"BCCCCCB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BDDDDDB"
+"BDDDDDB"
+"BDDFDDB"
+"BDDDDDB"
+"BDDDDDB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BEEEEEB"
+"BEEEEEB"
+"BEEFEEB"
+"BEEEEEB"
+"BEEEEEB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BFFFFFB"
+"BFFFFFB"
+"BFFFFFB"
+"BFFFFFB"
+"BFFFFFB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BGGGGGB"
+"BGGGGGB"
+"BGGFGGB"
+"BGGGGGB"
+"BGGGGGB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BHHHHHB"
+"BHHHHHB"
+"BHHFHHB"
+"BHHHHHB"
+"BHHHHHB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BIIIIIB"
+"BIIIIIB"
+"BIIFIIB"
+"BIIIIIB"
+"BIIIIIB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BJJJJJB"
+"BJJJJJB"
+"BJJFJJB"
+"BJJJJJB"
+"BJJJJJB"
+"BBBBBBB"
+
+"BBBBBBB"
+"BKKKKKB"
+"BKKKKKB"
+"BKKFKKB"
+"BKKKKKB"
+"BKKKKKB"
+"BBBBBBB"
+
+"CCCCCCC"
+"CAAAAAC"
+"CAAAAAC"
+"CAAFAAC"
+"CAAAAAC"
+"CAAAAAC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CBBBBBC"
+"CBBBBBC"
+"CBBFBBC"
+"CBBBBBC"
+"CBBBBBC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CCCCCCC"
+"CCCCCCC"
+"CCCFCCC"
+"CCCCCCC"
+"CCCCCCC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CDDDDDC"
+"CDDDDDC"
+"CDDFDDC"
+"CDDDDDC"
+"CDDDDDC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CEEEEEC"
+"CEEEEEC"
+"CEEFEEC"
+"CEEEEEC"
+"CEEEEEC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CFFFFFC"
+"CFFFFFC"
+"CFFFFFC"
+"CFFFFFC"
+"CFFFFFC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CGGGGGC"
+"CGGGGGC"
+"CGGFGGC"
+"CGGGGGC"
+"CGGGGGC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CHHHHHC"
+"CHHHHHC"
+"CHHFHHC"
+"CHHHHHC"
+"CHHHHHC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CIIIIIC"
+"CIIIIIC"
+"CIIFIIC"
+"CIIIIIC"
+"CIIIIIC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CJJJJJC"
+"CJJJJJC"
+"CJJFJJC"
+"CJJJJJC"
+"CJJJJJC"
+"CCCCCCC"
+
+"CCCCCCC"
+"CKKKKKC"
+"CKKKKKC"
+"CKKFKKC"
+"CKKKKKC"
+"CKKKKKC"
+"CCCCCCC"
+
+"DDDDDDD"
+"DAAAAAD"
+"DAAAAAD"
+"DAAFAAD"
+"DAAAAAD"
+"DAAAAAD"
+"DDDDDDD"
+
+"DDDDDDD"
+"DBBBBBD"
+"DBBBBBD"
+"DBBFBBD"
+"DBBBBBD"
+"DBBBBBD"
+"DDDDDDD"
+
+"DDDDDDD"
+"DCCCCCD"
+"DCCCCCD"
+"DCCFCCD"
+"DCCCCCD"
+"DCCCCCD"
+"DDDDDDD"
+
+"DDDDDDD"
+"DDDDDDD"
+"DDDDDDD"
+"DDDFDDD"
+"DDDDDDD"
+"DDDDDDD"
+"DDDDDDD"
+
+"DDDDDDD"
+"DEEEEED"
+"DEEEEED"
+"DEEFEED"
+"DEEEEED"
+"DEEEEED"
+"DDDDDDD"
+
+"DDDDDDD"
+"DFFFFFD"
+"DFFFFFD"
+"DFFFFFD"
+"DFFFFFD"
+"DFFFFFD"
+"DDDDDDD"
+
+"DDDDDDD"
+"DGGGGGD"
+"DGGGGGD"
+"DGGFGGD"
+"DGGGGGD"
+"DGGGGGD"
+"DDDDDDD"
+
+"DDDDDDD"
+"DHHHHHD"
+"DHHHHHD"
+"DHHFHHD"
+"DHHHHHD"
+"DHHHHHD"
+"DDDDDDD"
+
+"DDDDDDD"
+"DIIIIID"
+"DIIIIID"
+"DIIFIID"
+"DIIIIID"
+"DIIIIID"
+"DDDDDDD"
+
+"DDDDDDD"
+"DJJJJJD"
+"DJJJJJD"
+"DJJFJJD"
+"DJJJJJD"
+"DJJJJJD"
+"DDDDDDD"
+
+"DDDDDDD"
+"DKKKKKD"
+"DKKKKKD"
+"DKKFKKD"
+"DKKKKKD"
+"DKKKKKD"
+"DDDDDDD"
+
+"EEEEEEE"
+"EAAAAAE"
+"EAAAAAE"
+"EAAFAAE"
+"EAAAAAE"
+"EAAAAAE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EBBBBBE"
+"EBBBBBE"
+"EBBFBBE"
+"EBBBBBE"
+"EBBBBBE"
+"EEEEEEE"
+
+"EEEEEEE"
+"ECCCCCE"
+"ECCCCCE"
+"ECCFCCE"
+"ECCCCCE"
+"ECCCCCE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EDDDDDE"
+"EDDDDDE"
+"EDDFDDE"
+"EDDDDDE"
+"EDDDDDE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EEEEEEE"
+"EEEEEEE"
+"EEEFEEE"
+"EEEEEEE"
+"EEEEEEE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EFFFFFE"
+"EFFFFFE"
+"EFFFFFE"
+"EFFFFFE"
+"EFFFFFE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EGGGGGE"
+"EGGGGGE"
+"EGGFGGE"
+"EGGGGGE"
+"EGGGGGE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EHHHHHE"
+"EHHHHHE"
+"EHHFHHE"
+"EHHHHHE"
+"EHHHHHE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EIIIIIE"
+"EIIIIIE"
+"EIIFIIE"
+"EIIIIIE"
+"EIIIIIE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EJJJJJE"
+"EJJJJJE"
+"EJJFJJE"
+"EJJJJJE"
+"EJJJJJE"
+"EEEEEEE"
+
+"EEEEEEE"
+"EKKKKKE"
+"EKKKKKE"
+"EKKFKKE"
+"EKKKKKE"
+"EKKKKKE"
+"EEEEEEE"
+
+"FFFFFFF"
+"FAAAAAF"
+"FAAAAAF"
+"FAAFAAF"
+"FAAAAAF"
+"FAAAAAF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FBBBBBF"
+"FBBBBBF"
+"FBBFBBF"
+"FBBBBBF"
+"FBBBBBF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FCCCCCF"
+"FCCCCCF"
+"FCCFCCF"
+"FCCCCCF"
+"FCCCCCF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FDDDDDF"
+"FDDDDDF"
+"FDDFDDF"
+"FDDDDDF"
+"FDDDDDF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FEEEEEF"
+"FEEEEEF"
+"FEEFEEF"
+"FEEEEEF"
+"FEEEEEF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FFFFFFF"
+"FFFFFFF"
+"FFFFFFF"
+"FFFFFFF"
+"FFFFFFF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FGGGGGF"
+"FGGGGGF"
+"FGGFGGF"
+"FGGGGGF"
+"FGGGGGF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FHHHHHF"
+"FHHHHHF"
+"FHHFHHF"
+"FHHHHHF"
+"FHHHHHF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FIIIIIF"
+"FIIIIIF"
+"FIIFIIF"
+"FIIIIIF"
+"FIIIIIF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FJJJJJF"
+"FJJJJJF"
+"FJJFJJF"
+"FJJJJJF"
+"FJJJJJF"
+"FFFFFFF"
+
+"FFFFFFF"
+"FKKKKKF"
+"FKKKKKF"
+"FKKFKKF"
+"FKKKKKF"
+"FKKKKKF"
+"FFFFFFF"
+
+"GGGGGGG"
+"GAAAAAG"
+"GAAAAAG"
+"GAAFAAG"
+"GAAAAAG"
+"GAAAAAG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GBBBBBG"
+"GBBBBBG"
+"GBBFBBG"
+"GBBBBBG"
+"GBBBBBG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GCCCCCG"
+"GCCCCCG"
+"GCCFCCG"
+"GCCCCCG"
+"GCCCCCG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GDDDDDG"
+"GDDDDDG"
+"GDDFDDG"
+"GDDDDDG"
+"GDDDDDG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GEEEEEG"
+"GEEEEEG"
+"GEEFEEG"
+"GEEEEEG"
+"GEEEEEG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GFFFFFG"
+"GFFFFFG"
+"GFFFFFG"
+"GFFFFFG"
+"GFFFFFG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GGGGGGG"
+"GGGGGGG"
+"GGGFGGG"
+"GGGGGGG"
+"GGGGGGG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GHHHHHG"
+"GHHHHHG"
+"GHHFHHG"
+"GHHHHHG"
+"GHHHHHG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GIIIIIG"
+"GIIIIIG"
+"GIIFIIG"
+"GIIIIIG"
+"GIIIIIG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GJJJJJG"
+"GJJJJJG"
+"GJJFJJG"
+"GJJJJJG"
+"GJJJJJG"
+"GGGGGGG"
+
+"GGGGGGG"
+"GKKKKKG"
+"GKKKKKG"
+"GKKFKKG"
+"GKKKKKG"
+"GKKKKKG"
+"GGGGGGG"
+
+"HHHHHHH"
+"HAAAAAH"
+"HAAAAAH"
+"HAAFAAH"
+"HAAAAAH"
+"HAAAAAH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HBBBBBH"
+"HBBBBBH"
+"HBBFBBH"
+"HBBBBBH"
+"HBBBBBH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HCCCCCH"
+"HCCCCCH"
+"HCCFCCH"
+"HCCCCCH"
+"HCCCCCH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HDDDDDH"
+"HDDDDDH"
+"HDDFDDH"
+"HDDDDDH"
+"HDDDDDH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HEEEEEH"
+"HEEEEEH"
+"HEEFEEH"
+"HEEEEEH"
+"HEEEEEH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HFFFFFH"
+"HFFFFFH"
+"HFFFFFH"
+"HFFFFFH"
+"HFFFFFH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HGGGGGH"
+"HGGGGGH"
+"HGGFGGH"
+"HGGGGGH"
+"HGGGGGH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HHHHHHH"
+"HHHHHHH"
+"HHHFHHH"
+"HHHHHHH"
+"HHHHHHH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HIIIIIH"
+"HIIIIIH"
+"HIIFIIH"
+"HIIIIIH"
+"HIIIIIH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HJJJJJH"
+"HJJJJJH"
+"HJJFJJH"
+"HJJJJJH"
+"HJJJJJH"
+"HHHHHHH"
+
+"HHHHHHH"
+"HKKKKKH"
+"HKKKKKH"
+"HKKFKKH"
+"HKKKKKH"
+"HKKKKKH"
+"HHHHHHH"
+
+"IIIIIII"
+"IAAAAAI"
+"IAAAAAI"
+"IAAFAAI"
+"IAAAAAI"
+"IAAAAAI"
+"IIIIIII"
+
+"IIIIIII"
+"IBBBBBI"
+"IBBBBBI"
+"IBBFBBI"
+"IBBBBBI"
+"IBBBBBI"
+"IIIIIII"
+
+"IIIIIII"
+"ICCCCCI"
+"ICCCCCI"
+"ICCFCCI"
+"ICCCCCI"
+"ICCCCCI"
+"IIIIIII"
+
+"IIIIIII"
+"IDDDDDI"
+"IDDDDDI"
+"IDDFDDI"
+"IDDDDDI"
+"IDDDDDI"
+"IIIIIII"
+
+"IIIIIII"
+"IEEEEEI"
+"IEEEEEI"
+"IEEFEEI"
+"IEEEEEI"
+"IEEEEEI"
+"IIIIIII"
+
+"IIIIIII"
+"IFFFFFI"
+"IFFFFFI"
+"IFFFFFI"
+"IFFFFFI"
+"IFFFFFI"
+"IIIIIII"
+
+"IIIIIII"
+"IGGGGGI"
+"IGGGGGI"
+"IGGFGGI"
+"IGGGGGI"
+"IGGGGGI"
+"IIIIIII"
+
+"IIIIIII"
+"IHHHHHI"
+"IHHHHHI"
+"IHHFHHI"
+"IHHHHHI"
+"IHHHHHI"
+"IIIIIII"
+
+"IIIIIII"
+"IIIIIII"
+"IIIIIII"
+"IIIFIII"
+"IIIIIII"
+"IIIIIII"
+"IIIIIII"
+
+"IIIIIII"
+"IJJJJJI"
+"IJJJJJI"
+"IJJFJJI"
+"IJJJJJI"
+"IJJJJJI"
+"IIIIIII"
+
+"IIIIIII"
+"IKKKKKI"
+"IKKKKKI"
+"IKKFKKI"
+"IKKKKKI"
+"IKKKKKI"
+"IIIIIII"
+
+"JJJJJJJ"
+"JAAAAAJ"
+"JAAAAAJ"
+"JAAFAAJ"
+"JAAAAAJ"
+"JAAAAAJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JBBBBBJ"
+"JBBBBBJ"
+"JBBFBBJ"
+"JBBBBBJ"
+"JBBBBBJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JCCCCCJ"
+"JCCCCCJ"
+"JCCFCCJ"
+"JCCCCCJ"
+"JCCCCCJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JDDDDDJ"
+"JDDDDDJ"
+"JDDFDDJ"
+"JDDDDDJ"
+"JDDDDDJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JEEEEEJ"
+"JEEEEEJ"
+"JEEFEEJ"
+"JEEEEEJ"
+"JEEEEEJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JFFFFFJ"
+"JFFFFFJ"
+"JFFFFFJ"
+"JFFFFFJ"
+"JFFFFFJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JGGGGGJ"
+"JGGGGGJ"
+"JGGFGGJ"
+"JGGGGGJ"
+"JGGGGGJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JHHHHHJ"
+"JHHHHHJ"
+"JHHFHHJ"
+"JHHHHHJ"
+"JHHHHHJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JIIIIIJ"
+"JIIIIIJ"
+"JIIFIIJ"
+"JIIIIIJ"
+"JIIIIIJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JJJJJJJ"
+"JJJJJJJ"
+"JJJFJJJ"
+"JJJJJJJ"
+"JJJJJJJ"
+"JJJJJJJ"
+
+"JJJJJJJ"
+"JKKKKKJ"
+"JKKKKKJ"
+"JKKFKKJ"
+"JKKKKKJ"
+"JKKKKKJ"
+"JJJJJJJ"
+
+"KKKKKKK"
+"KAAAAAK"
+"KAAAAAK"
+"KAAFAAK"
+"KAAAAAK"
+"KAAAAAK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KBBBBBK"
+"KBBBBBK"
+"KBBFBBK"
+"KBBBBBK"
+"KBBBBBK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KCCCCCK"
+"KCCCCCK"
+"KCCFCCK"
+"KCCCCCK"
+"KCCCCCK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KDDDDDK"
+"KDDDDDK"
+"KDDFDDK"
+"KDDDDDK"
+"KDDDDDK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KEEEEEK"
+"KEEEEEK"
+"KEEFEEK"
+"KEEEEEK"
+"KEEEEEK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KFFFFFK"
+"KFFFFFK"
+"KFFFFFK"
+"KFFFFFK"
+"KFFFFFK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KGGGGGK"
+"KGGGGGK"
+"KGGFGGK"
+"KGGGGGK"
+"KGGGGGK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KHHHHHK"
+"KHHHHHK"
+"KHHFHHK"
+"KHHHHHK"
+"KHHHHHK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KIIIIIK"
+"KIIIIIK"
+"KIIFIIK"
+"KIIIIIK"
+"KIIIIIK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KJJJJJK"
+"KJJJJJK"
+"KJJFJJK"
+"KJJJJJK"
+"KJJJJJK"
+"KKKKKKK"
+
+"KKKKKKK"
+"KKKKKKK"
+"KKKKKKK"
+"KKKFKKK"
+"KKKKKKK"
+"KKKKKKK"
+"KKKKKKK"
+
+"AAAAAAA"
+"AAAAAAA"
+"AAAFAAA"
+"AAFFFAA"
+"AAAFAAA"
+"AAAAAAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AABBBAA"
+"ABBFBBA"
+"ABFFFBA"
+"ABBFBBA"
+"AABBBAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AACCCAA"
+"ACCFCCA"
+"ACFFFCA"
+"ACCFCCA"
+"AACCCAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AADDDAA"
+"ADDFDDA"
+"ADFFFDA"
+"ADDFDDA"
+"AADDDAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AAEEEAA"
+"AEEFEEA"
+"AEFFFEA"
+"AEEFEEA"
+"AAEEEAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AAFFFAA"
+"AFFFFFA"
+"AFFFFFA"
+"AFFFFFA"
+"AAFFFAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AAGGGAA"
+"AGGFGGA"
+"AGFFFGA"
+"AGGFGGA"
+"AAGGGAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AAHHHAA"
+"AHHFHHA"
+"AHFFFHA"
+"AHHFHHA"
+"AAHHHAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AAIIIAA"
+"AIIFIIA"
+"AIFFFIA"
+"AIIFIIA"
+"AAIIIAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AAJJJAA"
+"AJJFJJA"
+"AJFFFJA"
+"AJJFJJA"
+"AAJJJAA"
+"AAAAAAA"
+
+"AAAAAAA"
+"AAKKKAA"
+"AKKFKKA"
+"AKFFFKA"
+"AKKFKKA"
+"AAKKKAA"
+"AAAAAAA"
+
+"ABBBBBA"
+"BBAAABB"
+"BAAFAAB"
+"BAFFFAB"
+"BAAFAAB"
+"BBAAABB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBBBBBB"
+"BBBFBBB"
+"BBFFFBB"
+"BBBFBBB"
+"BBBBBBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBCCCBB"
+"BCCFCCB"
+"BCFFFCB"
+"BCCFCCB"
+"BBCCCBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBDDDBB"
+"BDDFDDB"
+"BDFFFDB"
+"BDDFDDB"
+"BBDDDBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBEEEBB"
+"BEEFEEB"
+"BEFFFEB"
+"BEEFEEB"
+"BBEEEBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBFFFBB"
+"BFFFFFB"
+"BFFFFFB"
+"BFFFFFB"
+"BBFFFBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBGGGBB"
+"BGGFGGB"
+"BGFFFGB"
+"BGGFGGB"
+"BBGGGBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBHHHBB"
+"BHHFHHB"
+"BHFFFHB"
+"BHHFHHB"
+"BBHHHBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBIIIBB"
+"BIIFIIB"
+"BIFFFIB"
+"BIIFIIB"
+"BBIIIBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBJJJBB"
+"BJJFJJB"
+"BJFFFJB"
+"BJJFJJB"
+"BBJJJBB"
+"ABBBBBA"
+
+"ABBBBBA"
+"BBKKKBB"
+"BKKFKKB"
+"BKFFFKB"
+"BKKFKKB"
+"BBKKKBB"
+"ABBBBBA"
+
+"ACCCCCA"
+"CCAAACC"
+"CAAFAAC"
+"CAFFFAC"
+"CAAFAAC"
+"CCAAACC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCBBBCC"
+"CBBFBBC"
+"CBFFFBC"
+"CBBFBBC"
+"CCBBBCC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCCCCCC"
+"CCCFCCC"
+"CCFFFCC"
+"CCCFCCC"
+"CCCCCCC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCDDDCC"
+"CDDFDDC"
+"CDFFFDC"
+"CDDFDDC"
+"CCDDDCC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCEEECC"
+"CEEFEEC"
+"CEFFFEC"
+"CEEFEEC"
+"CCEEECC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCFFFCC"
+"CFFFFFC"
+"CFFFFFC"
+"CFFFFFC"
+"CCFFFCC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCGGGCC"
+"CGGFGGC"
+"CGFFFGC"
+"CGGFGGC"
+"CCGGGCC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCHHHCC"
+"CHHFHHC"
+"CHFFFHC"
+"CHHFHHC"
+"CCHHHCC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCIIICC"
+"CIIFIIC"
+"CIFFFIC"
+"CIIFIIC"
+"CCIIICC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCJJJCC"
+"CJJFJJC"
+"CJFFFJC"
+"CJJFJJC"
+"CCJJJCC"
+"ACCCCCA"
+
+"ACCCCCA"
+"CCKKKCC"
+"CKKFKKC"
+"CKFFFKC"
+"CKKFKKC"
+"CCKKKCC"
+"ACCCCCA"
+
+"ADDDDDA"
+"DDAAADD"
+"DAAFAAD"
+"DAFFFAD"
+"DAAFAAD"
+"DDAAADD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDBBBDD"
+"DBBFBBD"
+"DBFFFBD"
+"DBBFBBD"
+"DDBBBDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDCCCDD"
+"DCCFCCD"
+"DCFFFCD"
+"DCCFCCD"
+"DDCCCDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDDDDDD"
+"DDDFDDD"
+"DDFFFDD"
+"DDDFDDD"
+"DDDDDDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDEEEDD"
+"DEEFEED"
+"DEFFFED"
+"DEEFEED"
+"DDEEEDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDFFFDD"
+"DFFFFFD"
+"DFFFFFD"
+"DFFFFFD"
+"DDFFFDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDGGGDD"
+"DGGFGGD"
+"DGFFFGD"
+"DGGFGGD"
+"DDGGGDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDHHHDD"
+"DHHFHHD"
+"DHFFFHD"
+"DHHFHHD"
+"DDHHHDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDIIIDD"
+"DIIFIID"
+"DIFFFID"
+"DIIFIID"
+"DDIIIDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDJJJDD"
+"DJJFJJD"
+"DJFFFJD"
+"DJJFJJD"
+"DDJJJDD"
+"ADDDDDA"
+
+"ADDDDDA"
+"DDKKKDD"
+"DKKFKKD"
+"DKFFFKD"
+"DKKFKKD"
+"DDKKKDD"
+"ADDDDDA"
+
+"AEEEEEA"
+"EEAAAEE"
+"EAAFAAE"
+"EAFFFAE"
+"EAAFAAE"
+"EEAAAEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEBBBEE"
+"EBBFBBE"
+"EBFFFBE"
+"EBBFBBE"
+"EEBBBEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EECCCEE"
+"ECCFCCE"
+"ECFFFCE"
+"ECCFCCE"
+"EECCCEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEDDDEE"
+"EDDFDDE"
+"EDFFFDE"
+"EDDFDDE"
+"EEDDDEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEEEEEE"
+"EEEFEEE"
+"EEFFFEE"
+"EEEFEEE"
+"EEEEEEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEFFFEE"
+"EFFFFFE"
+"EFFFFFE"
+"EFFFFFE"
+"EEFFFEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEGGGEE"
+"EGGFGGE"
+"EGFFFGE"
+"EGGFGGE"
+"EEGGGEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEHHHEE"
+"EHHFHHE"
+"EHFFFHE"
+"EHHFHHE"
+"EEHHHEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEIIIEE"
+"EIIFIIE"
+"EIFFFIE"
+"EIIFIIE"
+"EEIIIEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEJJJEE"
+"EJJFJJE"
+"EJFFFJE"
+"EJJFJJE"
+"EEJJJEE"
+"AEEEEEA"
+
+"AEEEEEA"
+"EEKKKEE"
+"EKKFKKE"
+"EKFFFKE"
+"EKKFKKE"
+"EEKKKEE"
+"AEEEEEA"
+
+"AFFFFFA"
+"FFAAAFF"
+"FAAFAAF"
+"FAFFFAF"
+"FAAFAAF"
+"FFAAAFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFBBBFF"
+"FBBFBBF"
+"FBFFFBF"
+"FBBFBBF"
+"FFBBBFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFCCCFF"
+"FCCFCCF"
+"FCFFFCF"
+"FCCFCCF"
+"FFCCCFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFDDDFF"
+"FDDFDDF"
+"FDFFFDF"
+"FDDFDDF"
+"FFDDDFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFEEEFF"
+"FEEFEEF"
+"FEFFFEF"
+"FEEFEEF"
+"FFEEEFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFFFFFF"
+"FFFFFFF"
+"FFFFFFF"
+"FFFFFFF"
+"FFFFFFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFGGGFF"
+"FGGFGGF"
+"FGFFFGF"
+"FGGFGGF"
+"FFGGGFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFHHHFF"
+"FHHFHHF"
+"FHFFFHF"
+"FHHFHHF"
+"FFHHHFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFIIIFF"
+"FIIFIIF"
+"FIFFFIF"
+"FIIFIIF"
+"FFIIIFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFJJJFF"
+"FJJFJJF"
+"FJFFFJF"
+"FJJFJJF"
+"FFJJJFF"
+"AFFFFFA"
+
+"AFFFFFA"
+"FFKKKFF"
+"FKKFKKF"
+"FKFFFKF"
+"FKKFKKF"
+"FFKKKFF"
+"AFFFFFA"
+
+"AGGGGGA"
+"GGAAAGG"
+"GAAFAAG"
+"GAFFFAG"
+"GAAFAAG"
+"GGAAAGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGBBBGG"
+"GBBFBBG"
+"GBFFFBG"
+"GBBFBBG"
+"GGBBBGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGCCCGG"
+"GCCFCCG"
+"GCFFFCG"
+"GCCFCCG"
+"GGCCCGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGDDDGG"
+"GDDFDDG"
+"GDFFFDG"
+"GDDFDDG"
+"GGDDDGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGEEEGG"
+"GEEFEEG"
+"GEFFFEG"
+"GEEFEEG"
+"GGEEEGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGFFFGG"
+"GFFFFFG"
+"GFFFFFG"
+"GFFFFFG"
+"GGFFFGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGGGGGG"
+"GGGFGGG"
+"GGFFFGG"
+"GGGFGGG"
+"GGGGGGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGHHHGG"
+"GHHFHHG"
+"GHFFFHG"
+"GHHFHHG"
+"GGHHHGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGIIIGG"
+"GIIFIIG"
+"GIFFFIG"
+"GIIFIIG"
+"GGIIIGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGJJJGG"
+"GJJFJJG"
+"GJFFFJG"
+"GJJFJJG"
+"GGJJJGG"
+"AGGGGGA"
+
+"AGGGGGA"
+"GGKKKGG"
+"GKKFKKG"
+"GKFFFKG"
+"GKKFKKG"
+"GGKKKGG"
+"AGGGGGA"
+
+"AHHHHHA"
+"HHAAAHH"
+"HAAFAAH"
+"HAFFFAH"
+"HAAFAAH"
+"HHAAAHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHBBBHH"
+"HBBFBBH"
+"HBFFFBH"
+"HBBFBBH"
+"HHBBBHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHCCCHH"
+"HCCFCCH"
+"HCFFFCH"
+"HCCFCCH"
+"HHCCCHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHDDDHH"
+"HDDFDDH"
+"HDFFFDH"
+"HDDFDDH"
+"HHDDDHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHEEEHH"
+"HEEFEEH"
+"HEFFFEH"
+"HEEFEEH"
+"HHEEEHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHFFFHH"
+"HFFFFFH"
+"HFFFFFH"
+"HFFFFFH"
+"HHFFFHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHGGGHH"
+"HGGFGGH"
+"HGFFFGH"
+"HGGFGGH"
+"HHGGGHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHHHHHH"
+"HHHFHHH"
+"HHFFFHH"
+"HHHFHHH"
+"HHHHHHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHIIIHH"
+"HIIFIIH"
+"HIFFFIH"
+"HIIFIIH"
+"HHIIIHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHJJJHH"
+"HJJFJJH"
+"HJFFFJH"
+"HJJFJJH"
+"HHJJJHH"
+"AHHHHHA"
+
+"AHHHHHA"
+"HHKKKHH"
+"HKKFKKH"
+"HKFFFKH"
+"HKKFKKH"
+"HHKKKHH"
+"AHHHHHA"
+
+"AIIIIIA"
+"IIAAAII"
+"IAAFAAI"
+"IAFFFAI"
+"IAAFAAI"
+"IIAAAII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIBBBII"
+"IBBFBBI"
+"IBFFFBI"
+"IBBFBBI"
+"IIBBBII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IICCCII"
+"ICCFCCI"
+"ICFFFCI"
+"ICCFCCI"
+"IICCCII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIDDDII"
+"IDDFDDI"
+"IDFFFDI"
+"IDDFDDI"
+"IIDDDII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIEEEII"
+"IEEFEEI"
+"IEFFFEI"
+"IEEFEEI"
+"IIEEEII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIFFFII"
+"IFFFFFI"
+"IFFFFFI"
+"IFFFFFI"
+"IIFFFII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIGGGII"
+"IGGFGGI"
+"IGFFFGI"
+"IGGFGGI"
+"IIGGGII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIHHHII"
+"IHHFHHI"
+"IHFFFHI"
+"IHHFHHI"
+"IIHHHII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIIIIII"
+"IIIFIII"
+"IIFFFII"
+"IIIFIII"
+"IIIIIII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIJJJII"
+"IJJFJJI"
+"IJFFFJI"
+"IJJFJJI"
+"IIJJJII"
+"AIIIIIA"
+
+"AIIIIIA"
+"IIKKKII"
+"IKKFKKI"
+"IKFFFKI"
+"IKKFKKI"
+"IIKKKII"
+"AIIIIIA"
+
+"AJJJJJA"
+"JJAAAJJ"
+"JAAFAAJ"
+"JAFFFAJ"
+"JAAFAAJ"
+"JJAAAJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJBBBJJ"
+"JBBFBBJ"
+"JBFFFBJ"
+"JBBFBBJ"
+"JJBBBJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJCCCJJ"
+"JCCFCCJ"
+"JCFFFCJ"
+"JCCFCCJ"
+"JJCCCJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJDDDJJ"
+"JDDFDDJ"
+"JDFFFDJ"
+"JDDFDDJ"
+"JJDDDJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJEEEJJ"
+"JEEFEEJ"
+"JEFFFEJ"
+"JEEFEEJ"
+"JJEEEJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJFFFJJ"
+"JFFFFFJ"
+"JFFFFFJ"
+"JFFFFFJ"
+"JJFFFJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJGGGJJ"
+"JGGFGGJ"
+"JGFFFGJ"
+"JGGFGGJ"
+"JJGGGJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJHHHJJ"
+"JHHFHHJ"
+"JHFFFHJ"
+"JHHFHHJ"
+"JJHHHJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJIIIJJ"
+"JIIFIIJ"
+"JIFFFIJ"
+"JIIFIIJ"
+"JJIIIJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJJJJJJ"
+"JJJFJJJ"
+"JJFFFJJ"
+"JJJFJJJ"
+"JJJJJJJ"
+"AJJJJJA"
+
+"AJJJJJA"
+"JJKKKJJ"
+"JKKFKKJ"
+"JKFFFKJ"
+"JKKFKKJ"
+"JJKKKJJ"
+"AJJJJJA"
+
+"AKKKKKA"
+"KKAAAKK"
+"KAAFAAK"
+"KAFFFAK"
+"KAAFAAK"
+"KKAAAKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKBBBKK"
+"KBBFBBK"
+"KBFFFBK"
+"KBBFBBK"
+"KKBBBKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKCCCKK"
+"KCCFCCK"
+"KCFFFCK"
+"KCCFCCK"
+"KKCCCKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKDDDKK"
+"KDDFDDK"
+"KDFFFDK"
+"KDDFDDK"
+"KKDDDKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKEEEKK"
+"KEEFEEK"
+"KEFFFEK"
+"KEEFEEK"
+"KKEEEKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKFFFKK"
+"KFFFFFK"
+"KFFFFFK"
+"KFFFFFK"
+"KKFFFKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKGGGKK"
+"KGGFGGK"
+"KGFFFGK"
+"KGGFGGK"
+"KKGGGKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKHHHKK"
+"KHHFHHK"
+"KHFFFHK"
+"KHHFHHK"
+"KKHHHKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKIIIKK"
+"KIIFIIK"
+"KIFFFIK"
+"KIIFIIK"
+"KKIIIKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKJJJKK"
+"KJJFJJK"
+"KJFFFJK"
+"KJJFJJK"
+"KKJJJKK"
+"AKKKKKA"
+
+"AKKKKKA"
+"KKKKKKK"
+"KKKFKKK"
+"KKFFFKK"
+"KKKFKKK"
+"KKKKKKK"
+"AKKKKKA"
+

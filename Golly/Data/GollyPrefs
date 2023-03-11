@@ -2,9 +2,9 @@
 # otherwise all your changes will be clobbered when Golly quits.
 
 prefs_version=4
-golly_version=3.2
-wx_version=wxWidgets 2.8.12
-opengl_version=4.5, glMaxTextureSize=16384
+golly_version=3.4
+wx_version=wxWidgets 3.0.5
+opengl_version=4.1, glMaxTextureSize=16384
 platform=Windows
 debug_level=0
 
@@ -114,9 +114,11 @@ key_action=z+shift+ctrl Redo
 # key_action=key+mods Name Layer...
 # key_action=key+mods Next Higher State
 # key_action=key+mods Next Lower State
+# key_action=key+mods Open Recent Pattern
 # key_action=key+mods Paste to Selection
 # key_action=key+mods Play Timeline Backwards
 # key_action=key+mods Run Clipboard
+# key_action=key+mods Run Recent Script
 # key_action=key+mods Run Script...
 # key_action=key+mods Save Extended RLE
 # key_action=key+mods Save Overlay...
@@ -170,7 +172,7 @@ hyperspeed=0
 hash_info=0
 show_population=1
 
-init_algo=Larger than Life
+init_algo=RuleLoader
 
 algorithm=QuickLife
 max_mem=0
@@ -226,7 +228,7 @@ to_rgb=255,255,0
 use_gradient=1
 colors=
 
-rule=R5,C0,M1,S34..58,B34..45,NM:T400,400
+rule=AnimatedPixelArt
 named_rule=LifeHistory|LifeHistory
 named_rule=3-4 Life|B34/S34
 named_rule=HighLife|B36/S23
@@ -311,6 +313,7 @@ show_files=1
 max_patterns=20 (1..100)
 max_scripts=20 (1..100)
 
+recent_pattern=Patterns\Other-Rules\animated-pixel-art-sample.zip
 recent_pattern=Patterns\Larger-than-Life\BugCollection.rle
 recent_pattern=Patterns\Generations\Banner.mcl
 recent_pattern=Patterns\Generations\Sawfish.rle
