@@ -1,0 +1,34 @@
+Wizznic 1.0-dev(B380). GPLv3 or newer Copyleft 2009-2015
+
+Directories:
+    Settings: .
+    DLC: ./dlc
+    Highscores: ./highscores
+    Editorlevels: ./editorlevels
+    Datafiles: ./
+
+Command-line parameters:
+    -gl            # Enable OpenGL.
+    -sw            # Disable OpenGL.
+    -glheight PX   # Window width  (-1 for auto).
+    -glwidth  PY   # Window height (-1 for auto).
+    -glfilter ST   # 0=Blocky, 1=Smooth.
+    -rift          # Usable for Oculus Rift.
+    -record [file] # on pc, use ffmpeg to encode video to file.mp4
+    -d PACKNAME    # Dump screenshots of levels in pack.
+    -d FILENAME    # Dump screenshot of level.
+    -f             # Enable fullscreen.
+    -w             # Disable fullscreen.
+    -z 2           # Software scale to 640x480.
+Loading settings from: ./settings.ini
+Enabling platform specific accelerated scaling.
+Scaling factor: 6.000000
+Screen surface using 3 bytes per pixel.
+statsInit(); Stats ready to be refreshed.
+initPack();
+initPack(); Added 12 packs.
+Applying settings..
+packSet(); Selecting pack 0...
+packSet(); Selected pack './packs/000_wizznic' Loading stats..
+packSet(); Stats loaded.
+Setting Music...
